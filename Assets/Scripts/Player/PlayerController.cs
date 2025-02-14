@@ -32,14 +32,19 @@ public class PlayerController : MonoBehaviour
     private float _descendingGravity = 0.5f;
 
     [SerializeField]
+    private float _jumpQueueSkinWidth = 0.05f;
+
+    [SerializeField]
     private float _skinWidth = 0.01f;
 
     [SerializeField]
     private LayerMask _feetMask;
 
     private bool _airborne = false;
-    private bool _hasDouble = false;
+    private bool _jumpQueued = false;
+    private bool _hasDoubleJump = false;
     private bool _dashing = false;
+    private bool _dashedOnce = false;
     private float _dashDelta = 0.0f;
     private float _dashSign = 1;
 
@@ -65,31 +70,45 @@ public class PlayerController : MonoBehaviour
             (element == ElementType.DIRT ? _dirtMoveSpeed : _moveSpeed);
 
 
-        RaycastHit2D hit = Physics2D.Raycast(
+        RaycastHit2D groundHit = Physics2D.Raycast(
             _collider.bounds.center - new Vector3(0, _collider.bounds.extents.y, 0), 
             transform.up * -1, 
             _skinWidth,
             _feetMask);
 
-        _airborne = !hit;
-        Debug.Log(hit.collider);
-        if (!_airborne && element != ElementType.DIRT && Input.GetButtonDown("Jump"))
+        _airborne = !groundHit;
+        if (!_airborne)
         {
-            _hasDouble = true;
-            _rb2d.linearVelocity = transform.up * _jumpSpeed;
+            _hasDoubleJump = true;
+            _dashedOnce = false;
+            if(element != ElementType.DIRT && (Input.GetButtonDown("Jump") || _jumpQueued))
+            {
+                _rb2d.linearVelocity = transform.up * _jumpSpeed;
+                _jumpQueued = false;
+            }
         }
         else
         {
-            if(element == ElementType.AIR)
+            RaycastHit2D jumpQueueHit = Physics2D.Raycast(
+                _collider.bounds.center - new Vector3(0, _collider.bounds.extents.y, 0),
+                transform.up * -1,
+                _jumpQueueSkinWidth,
+                _feetMask);
+
+           _jumpQueued = (bool)jumpQueueHit && Input.GetButtonDown("Jump");
+
+            if (element == ElementType.AIR)
             {
-                if (_hasDouble && Input.GetButtonDown("Jump"))
+                if (_hasDoubleJump && Input.GetButtonDown("Jump"))
                 {
                     _rb2d.linearVelocityY = _doubleJumpSpeed;
-                    _hasDouble = false;
+                    _hasDoubleJump = false;
+                    _jumpQueued = false;
                 }
-                if(Input.GetKeyDown(KeyCode.LeftShift))
+                if(!_dashedOnce && Input.GetKeyDown(KeyCode.LeftShift))
                 {
                     _dashing = true;
+                    _dashedOnce = true;
                     _dashDelta = 0;
                     _dashSign = Mathf.Sign(Input.GetAxis("Horizontal"));
                 }
@@ -103,7 +122,7 @@ public class PlayerController : MonoBehaviour
                     {
                         _dashDelta = 0;
                         _dashing = false;
-                        _rb2d.gravityScale = 1;
+                        _rb2d.gravityScale = _descendingGravity;
                     }
                 }
             }
