@@ -105,6 +105,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 1
   player: {fileID: 0}
+  headOffset: {x: 0, y: 0.1}
   projectilePrefab: {fileID: 8807617550778883883, guid: 3b2d6df5932fa194dbf6f66c0d386aea, type: 3}
   weaponPrefab: {fileID: 6827733943754080128}
 --- !u!61 &4556832890138427929
@@ -179,7 +180,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!1 &6827733943754080128
 GameObject:
   m_ObjectHideFlags: 0

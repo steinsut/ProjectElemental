@@ -409,7 +409,19 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Silver_Key_0: 483050325199192537
+      Silver_Key_1: -4057260315568638301
+      Silver_Key_10: 2094684657719826243
+      Silver_Key_11: -3869109475451097473
+      Silver_Key_2: 9024333868824553527
+      Silver_Key_3: 2350850159044874647
+      Silver_Key_4: 6259923950339741248
+      Silver_Key_5: -4786274877935618711
+      Silver_Key_6: -7239064541235273336
+      Silver_Key_7: -2775775472822563904
+      Silver_Key_8: 4684884789998883791
+      Silver_Key_9: 2791911999453820063
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

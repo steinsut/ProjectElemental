@@ -309,7 +309,15 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Silver_Chest_Open_0: 4880212730713047097
+      Silver_Chest_Open_1: -9032345834768348350
+      Silver_Chest_Open_2: 5175113736337847151
+      Silver_Chest_Open_3: -8000100486038749492
+      Silver_Chest_Open_4: 5283085325587426281
+      Silver_Chest_Open_5: -4194083058701474491
+      Silver_Chest_Open_6: -4035194783003813217
+      Silver_Chest_Open_7: -4736241949601940171
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

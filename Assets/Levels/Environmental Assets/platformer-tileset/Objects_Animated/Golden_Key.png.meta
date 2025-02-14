@@ -409,7 +409,19 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Golden_Key_0: -785641940956926436
+      Golden_Key_1: -3997219992957058831
+      Golden_Key_10: 5950493191485641222
+      Golden_Key_11: -7789389688733763658
+      Golden_Key_2: -4285333824214676864
+      Golden_Key_3: 9084426533983428651
+      Golden_Key_4: -6538491627920327683
+      Golden_Key_5: -7462966369161128888
+      Golden_Key_6: 2433157105122787667
+      Golden_Key_7: 7559861302976494023
+      Golden_Key_8: 6010308398698632861
+      Golden_Key_9: 7397139193280991878
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

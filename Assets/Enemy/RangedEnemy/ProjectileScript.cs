@@ -8,6 +8,10 @@ public class ProjectileScript : MonoBehaviour
     void Update()
     {
         transform.position += (Vector3)direction * projectTileSpeed * Time.deltaTime;
+        if (Mathf.Abs(transform.position.x) > 20f  || Mathf.Abs(transform.position.y) > 20f)
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     public void SetDirection(Vector2 direction){
@@ -21,6 +25,6 @@ public class ProjectileScript : MonoBehaviour
             //other.gameObject.GetComponent<IEnemy>().TakeDamage(1);
         }
         gameObject.SetActive(false);
-        
+
     }
 }
