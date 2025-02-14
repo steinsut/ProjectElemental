@@ -7,13 +7,15 @@ using Vector3 = UnityEngine.Vector3;
 public class MeleeEnemy : IEnemy
 {
     public int speed;
+    public Rigidbody2D rigidBody;
 
     protected override void EnemyAction(Vector2 Direction){
         if (Direction.magnitude < 0.5f)
         {
             StartCoroutine(Attack());
         }
-        transform.position += (Vector3)Direction.normalized * speed * Time.deltaTime;
+        Vector2 directionX = new Vector2(Direction.x, 0);
+        rigidBody.linearVelocityX = directionX.normalized.x * speed;
         
     }
 

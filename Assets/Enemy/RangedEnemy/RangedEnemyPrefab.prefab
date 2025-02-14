@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8127478257992949182}
   - component: {fileID: -4456011694132215860}
   - component: {fileID: 4556832890138427929}
+  - component: {fileID: 8452071738070688009}
   m_Layer: 8
   m_Name: RangedEnemyPrefab
   m_TagString: Enemy
@@ -106,7 +107,6 @@ MonoBehaviour:
   player: {fileID: 0}
   projectilePrefab: {fileID: 8807617550778883883, guid: 3b2d6df5932fa194dbf6f66c0d386aea, type: 3}
   weaponPrefab: {fileID: 6827733943754080128}
-  shootOffset: {x: 0, y: 0}
 --- !u!61 &4556832890138427929
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -153,6 +153,33 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 0.6743297}
   m_EdgeRadius: 0
+--- !u!50 &8452071738070688009
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 247699596390843848}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 256
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &6827733943754080128
 GameObject:
   m_ObjectHideFlags: 0
