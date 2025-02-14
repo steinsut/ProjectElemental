@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5835007677231199302}
   - component: {fileID: 1204699791767306646}
   - component: {fileID: 3637295240865831655}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: MeleeEnemyPrefab
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -109,6 +109,7 @@ MonoBehaviour:
   rigidBody: {fileID: 1204699791767306646}
   feetOffset: {x: 0, y: -0.2}
   jumpAmount: 3
+  patrolRange: 3
 --- !u!50 &1204699791767306646
 Rigidbody2D:
   serializedVersion: 5
@@ -131,7 +132,7 @@ Rigidbody2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 1280
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -4456011694132215860}
   - component: {fileID: 4556832890138427929}
   - component: {fileID: 8452071738070688009}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: RangedEnemyPrefab
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -176,7 +176,7 @@ Rigidbody2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 1280
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -191,7 +191,7 @@ GameObject:
   m_Component:
   - component: {fileID: 271787945860665702}
   - component: {fileID: 433822678135614098}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: Weapon
   m_TagString: Enemy
   m_Icon: {fileID: 0}

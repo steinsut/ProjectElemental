@@ -10,14 +10,16 @@ public abstract class IEnemy : MonoBehaviour
 
     protected virtual void Update()
     {
-        if(priority <= 0){
-            FindPlayer();
+        if(priority < 2){
+            if(!FindPlayer() && priority <= 0){
+                Patrol();
+            }
         }
         
 
     }
 
-    void FindPlayer(){
+    bool FindPlayer(){
         LayerMask mask = ~LayerMask.GetMask("Enemy");
         RaycastHit2D raycast = Physics2D.Raycast(transform.position + (Vector3) headOffset, (player.transform.position - transform.position).normalized, 100f, mask);
 
@@ -27,8 +29,12 @@ public abstract class IEnemy : MonoBehaviour
                     transform.Rotate(new Vector3(0,180,0));
             }
             EnemyAction(Direction);
+            return true;
         }
+        return false;
     }
+
+    virtual protected void Patrol(){}
 
     abstract protected void EnemyAction(Vector2 Direction);
 
