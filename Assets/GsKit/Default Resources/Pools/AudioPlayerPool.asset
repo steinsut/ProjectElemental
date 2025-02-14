@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b40f2c8ba141907418c73fe2c451199a, type: 3}
+  m_Name: AudioPlayerPool
+  m_EditorClassIdentifier: 
+  _resourceID: pool_audio_player
+  _prefabResource: {fileID: 11400000, guid: a44c8e8ac5daa8947b2321fcab89d366, type: 2}
+  _minimumObjects: 3
+  _limitObjectCount: 0
+  _maximumObjects: 5
+  _populateOnLoad: 1
+  _resetOnReturn: 0
+  _componentMask: 6

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f4fe332fb716b146ab6e9fcdcfc3535, type: 3}
+  m_Name: Wingadinga
+  m_EditorClassIdentifier: 
+  _resourceID: grup
+  _audioClips:
+  - {fileID: 8300000, guid: 9f2fc21b3683c554d9a9bc92d7046b5f, type: 3}
+  - {fileID: 8300000, guid: 2c5405961a9ddd04db8696ca2a5f357d, type: 3}
+  - {fileID: 8300000, guid: f9930891c8c57374b990a037c5101021, type: 3}
+  - {fileID: 8300000, guid: f012b2267e0ae294f87331c422627317, type: 3}
+  - {fileID: 8300000, guid: 0326cf7eed8cad84aae9a969fba6c107, type: 3}
+  - {fileID: 8300000, guid: 8f1105a1009050741b42fbe8e85c7d3a, type: 3}
+  - {fileID: 8300000, guid: d03411fea3715d34997d236453fbf2d1, type: 3}
+  _playOrder: 2

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02024e36a2534b34fbcd172e42ba9ec8, type: 3}
+  m_Name: Default Text Sound
+  m_EditorClassIdentifier: 
+  _resourceID: snd_default_text
+  _audioName: Default Text Sound
+  _audioType: 0
+  _clip: {fileID: 8300000, guid: e1aa75f706f13d24d93862c63b75c477, type: 3}
+  _audioCover: {fileID: 0}
+  _artist: 

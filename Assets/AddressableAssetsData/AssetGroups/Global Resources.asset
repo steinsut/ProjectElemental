@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Global Resources
+  m_EditorClassIdentifier: 
+  m_GroupName: Global Resources
+  m_GUID: 7733ac4db5af4f94798e0f6be8b316f0
+  m_SerializeEntries:
+  - m_GUID: 0cc16985a644f3247bcd83cd6f9a90fe
+    m_Address: Assets/GsKit/Default Resources/Pools
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 341659a549e0ad8409f2a1a330c764ae
+    m_Address: Assets/GsKit/Default Resources/Settings
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 579c297b6133f044f8be87badfd881cd
+    m_Address: Assets/Test/Prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6841e208eeaf5124b89707f234457d2d
+    m_Address: Assets/Test/Audio/wngdng/Wingadinga.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9cb2ac3fc74460f4f8ddc0e158d9f7d1
+    m_Address: Assets/GsKit/Default Resources/Prefabs
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a34fcf7eff0915b4998deba9b77cf1e0
+    m_Address: Assets/Test/Audio/Cook.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bd037cadd7f40ce448f9dcebd10d3032
+    m_Address: Assets/Test/Audio/Default Text Sound.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ed4ff98e3a104694cb7e66c0ade30402
+    m_Address: Assets/Test/Audio/C o o k (CutePiano bgm).mp3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 880cda9027099c742a7bd90e431af128, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 4990190710a0b1c4e93624e04c0d384c, type: 2}
+    - {fileID: 11400000, guid: 9c3baf2714cdb1c4eab479db3c0a0691, type: 2}
