@@ -11,6 +11,8 @@ public class RuneScript : MonoBehaviour
     public int targetAmount;
     public int totalAmount;
     private bool active = false;
+    public Animator animator;
+    static int RunePickup = Animator.StringToHash("Pickup");
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {    
@@ -55,5 +57,12 @@ public class RuneScript : MonoBehaviour
         if(col.gameObject.CompareTag("Player")){
             active = false;
         }
+    }
+
+    public IEnumerator CollectRune(){
+        animator.CrossFade(RunePickup, 0,0);
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+        Destroy(gameObject);
+
     }
 }
