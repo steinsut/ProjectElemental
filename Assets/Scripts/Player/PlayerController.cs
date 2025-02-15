@@ -18,6 +18,9 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private Quaternion _initialRotation;
+    
+    [SerializeField]
+    private int _health = 5;
 
     [SerializeField]
     private float _moveSpeed = 1.0f;
@@ -104,6 +107,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float _waterbubbleCooldown = 1.0f;
 
+    [SerializeField]
+    private float _invulnerabilityTime = 1.0f;
+    private float _invulnerabilityCounter = 0f;
+
     private bool _airborne = false;
     private bool _jumpQueued = false;
     private bool _hasDoubleJump = false;
@@ -114,6 +121,7 @@ public class PlayerController : MonoBehaviour
 
     private bool _canBeMoved = true;
     private bool _canAttack = true;
+    private bool _damaged = false;
 
     private int _currentAttack;
     private Coroutine _currentAttackCoroutine;
@@ -350,6 +358,13 @@ public class PlayerController : MonoBehaviour
             Vector2 direction = (mousePos - transform.position).normalized;
             _mouseAnchor.up = direction;
         }
+        if(_damaged){
+            _invulnerabilityCounter += Time.deltaTime;
+            if(_invulnerabilityCounter >= _invulnerabilityTime){
+                _damaged = false;
+                _invulnerabilityCounter = 0f;
+            }
+        }
     }
 
     public void ToggleMovementControls()
@@ -510,5 +525,50 @@ public class PlayerController : MonoBehaviour
                 _currentAttackCoroutine = StartCoroutine(WaitWaterbubbleCooldown());
                 break;
         }
+    }
+
+    public void SetHealth(int health){
+        _health = health;
+    }
+    public void GainHealth(){
+        _health++;
+        //Do gain health UI work here
+    }
+    public void LoseHealth(){
+        _damaged = true;
+        _health--;
+        //Do lose health UI work here
+    }
+
+    void OnTriggerEnter2D(Collider2D other){
+        if(other.gameObject.layer == LayerMask.NameToLayer("EnemyProjectile") || other.gameObject.CompareTag("EnvironmentalHazard")){
+            if(_damaged){return;}
+            StartCoroutine(TakeDamageCoroutine());
+        }
+    }
+
+    IEnumerator TakeDamageCoroutine(){
+        LoseHealth();
+        ToggleAttackControls();
+        ToggleMovementControls();
+        if(_health <= 0){
+            yield return DeathCoroutine();
+        }else{
+            Color originalColor = GetComponent<SpriteRenderer>().color;
+            GetComponent<SpriteRenderer>().color = Color.red;
+            yield return new WaitForSeconds(0.3f);
+            
+            GetComponent<SpriteRenderer>().color = originalColor;
+            ToggleAttackControls();
+            ToggleMovementControls();
+            yield return null;
+        }
+        
+    }
+
+    IEnumerator DeathCoroutine(){
+        Debug.Log("YOU DIED");
+        //Implement death procedure here
+        yield return null;
     }
 }
