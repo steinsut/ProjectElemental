@@ -119,6 +119,75 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &75671917
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 762489156848650441, guid: d09e69b18c313d84ca4a071d73bf82db, type: 3}
+      propertyPath: runeType
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 762489156848650441, guid: d09e69b18c313d84ca4a071d73bf82db, type: 3}
+      propertyPath: totalAmount
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 762489156848650441, guid: d09e69b18c313d84ca4a071d73bf82db, type: 3}
+      propertyPath: targetAmount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2142973143337293379, guid: d09e69b18c313d84ca4a071d73bf82db, type: 3}
+      propertyPath: m_Name
+      value: Rune (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4056244426601165296, guid: d09e69b18c313d84ca4a071d73bf82db, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.6996398
+      objectReference: {fileID: 0}
+    - target: {fileID: 4056244426601165296, guid: d09e69b18c313d84ca4a071d73bf82db, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.04051602
+      objectReference: {fileID: 0}
+    - target: {fileID: 4056244426601165296, guid: d09e69b18c313d84ca4a071d73bf82db, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4056244426601165296, guid: d09e69b18c313d84ca4a071d73bf82db, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4056244426601165296, guid: d09e69b18c313d84ca4a071d73bf82db, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4056244426601165296, guid: d09e69b18c313d84ca4a071d73bf82db, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4056244426601165296, guid: d09e69b18c313d84ca4a071d73bf82db, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4056244426601165296, guid: d09e69b18c313d84ca4a071d73bf82db, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4056244426601165296, guid: d09e69b18c313d84ca4a071d73bf82db, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4056244426601165296, guid: d09e69b18c313d84ca4a071d73bf82db, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d09e69b18c313d84ca4a071d73bf82db, type: 3}
 --- !u!1 &219954654
 GameObject:
   m_ObjectHideFlags: 0
@@ -1046,7 +1115,7 @@ Transform:
   m_GameObject: {fileID: 738663659}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.57, y: -0.52, z: 0}
+  m_LocalPosition: {x: 2.57, y: -0.89, z: 0}
   m_LocalScale: {x: 0.58680004, y: 1.89, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1472,7 +1541,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 762489156848650441, guid: d09e69b18c313d84ca4a071d73bf82db, type: 3}
       propertyPath: runeType
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 762489156848650441, guid: d09e69b18c313d84ca4a071d73bf82db, type: 3}
       propertyPath: totalAmount
@@ -1681,3 +1750,4 @@ SceneRoots:
   - {fileID: 1032187687}
   - {fileID: 294720267}
   - {fileID: 1414891031}
+  - {fileID: 75671917}

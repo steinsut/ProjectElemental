@@ -7,6 +7,8 @@ public class RuneScript : MonoBehaviour
     public ElementType runeType;
     public Color targetColor;
     public GameObject minigamePanel;
+    public GameObject animations;
+
     GameObject player;
     public int targetAmount;
     public int totalAmount;
@@ -22,12 +24,14 @@ public class RuneScript : MonoBehaviour
                 break;
             case ElementType.FIRE:
                 targetColor = Color.red;
+                animations.GetComponent<Animator>().SetTrigger("FireAnimations");
                 break;
             case ElementType.WATER:
                 targetColor = Color.blue;
                 break;
             case ElementType.AIR:
                 targetColor = Color.gray;
+                animations.GetComponent<Animator>().SetTrigger("AirAnimations");
                 break;
             case ElementType.WOOD:
                 break;
@@ -61,6 +65,7 @@ public class RuneScript : MonoBehaviour
 
     public IEnumerator CollectRune(){
         animator.CrossFade(RunePickup, 0,0);
+        animations.SetActive(false);
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
         Destroy(gameObject);
 
