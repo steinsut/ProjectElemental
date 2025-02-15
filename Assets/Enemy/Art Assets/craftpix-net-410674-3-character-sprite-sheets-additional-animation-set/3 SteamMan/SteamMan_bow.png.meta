@@ -259,7 +259,13 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      SteamMan_bow_0: -2822813255897343647
+      SteamMan_bow_1: -8157283300237580730
+      SteamMan_bow_2: 3628443906202056851
+      SteamMan_bow_3: 2502578959522105048
+      SteamMan_bow_4: 2881585384182993732
+      SteamMan_bow_5: 4720584516175018357
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

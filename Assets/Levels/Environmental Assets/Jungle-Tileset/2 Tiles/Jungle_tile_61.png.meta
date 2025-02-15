@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Jungle_tile_61_0: -1418537069965920550
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -209,7 +209,11 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Woodcutter_idle_0: 5487567821104667819
+      Woodcutter_idle_1: -6244929058173570829
+      Woodcutter_idle_2: -2387592051759440097
+      Woodcutter_idle_3: 1536802938262419634
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

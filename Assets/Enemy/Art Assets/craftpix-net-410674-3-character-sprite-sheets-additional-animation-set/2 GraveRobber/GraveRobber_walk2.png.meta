@@ -259,7 +259,13 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      GraveRobber_walk2_0: 3766101342367531712
+      GraveRobber_walk2_1: 6632118494242977471
+      GraveRobber_walk2_2: -7918707590347857168
+      GraveRobber_walk2_3: 5356348833782799114
+      GraveRobber_walk2_4: 1657705118980150799
+      GraveRobber_walk2_5: -3522875038918483766
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

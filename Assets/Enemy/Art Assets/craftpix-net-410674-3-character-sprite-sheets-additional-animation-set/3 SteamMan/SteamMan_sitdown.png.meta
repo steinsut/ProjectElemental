@@ -209,7 +209,11 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      SteamMan_sitdown_0: -5402498917431334987
+      SteamMan_sitdown_1: 2065927715414317756
+      SteamMan_sitdown_2: -5746058066979374355
+      SteamMan_sitdown_3: -1063155668652336733
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

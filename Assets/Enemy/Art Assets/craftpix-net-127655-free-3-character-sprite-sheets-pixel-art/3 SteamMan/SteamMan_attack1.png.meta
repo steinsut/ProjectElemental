@@ -259,7 +259,13 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      SteamMan_attack1_0: 126875518365691328
+      SteamMan_attack1_1: 3735444577153734643
+      SteamMan_attack1_2: 5475850729157044561
+      SteamMan_attack1_3: -589046135383773679
+      SteamMan_attack1_4: 4534390971290800426
+      SteamMan_attack1_5: -1307644985123815590
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

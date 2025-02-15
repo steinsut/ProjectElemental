@@ -1,4 +1,3 @@
-using GsKit.Extensions;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.ShaderGraph.Internal;
@@ -167,7 +166,7 @@ public class PlayerController : MonoBehaviour
                         _skinWidth,
                         _feetMask);
 
-                    if (headHit && Input.GetKey(KeyCode.LeftShift))
+                    if (_element == ElementType.WATER && headHit && Input.GetKey(KeyCode.LeftShift))
                     {
                         transform.up *= -1;
                         _rb2d.gravityScale = 0;
@@ -236,9 +235,6 @@ public class PlayerController : MonoBehaviour
                     transform.up * -1,
                     _skinWidth,
                     _feetMask);
-                this.LogInfo("DOWN " + transform.up * -1);
-                this.LogInfo("RIGHT " + transform.right);
-                this.LogInfo("ASD " + groundHit);
             }
             else
             {
@@ -442,7 +438,6 @@ public class PlayerController : MonoBehaviour
             (enemy.transform.position - _windblower.transform.position).magnitude,
             _feetMask);
 
-        this.LogInfo(hit);
         if(!hit)
         {
             enemy.Push(_mouseAnchor.up * _windforce);

@@ -259,7 +259,13 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      SteamMan_death_0: 8913045925950967760
+      SteamMan_death_1: -1992140375118942715
+      SteamMan_death_2: 7265492052769299911
+      SteamMan_death_3: 6251927883232071213
+      SteamMan_death_4: 8860649773301482043
+      SteamMan_death_5: -7038000109066326460
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
