@@ -23,7 +23,7 @@ public class LevelCameraManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        targetPosition = this.gameObject;
+        targetPosition = cameraPositions[0];
     }
 
     // Update is called once per frame
