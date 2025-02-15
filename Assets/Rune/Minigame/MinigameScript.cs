@@ -17,9 +17,9 @@ public class MinigameScript : MonoBehaviour
     GameObject currRune;
     public GameObject minigameTarget;
     public List<GameObject> targetPool;
-    public void StartMinigame(int targetAmount, ElementType target, GameObject rune, PlayerController player){
+    public void StartMinigame(int targetAmount, int totalAmount, ElementType target, GameObject rune, PlayerController player){
         active = true;
-        this.totalTargets = targetAmount * 4;
+        this.totalTargets = totalAmount;
         if(targetPool == null){
             targetPool = new List<GameObject>();
         }
@@ -34,6 +34,7 @@ public class MinigameScript : MonoBehaviour
         this.currRune = rune;
         this.player = player;
         this.targetAmount = targetAmount;
+        InitializeElements();
         currentHit = 0;
         panelImage = GetComponentInChildren<Image>();
         panelImage.raycastTarget = true;
@@ -50,7 +51,7 @@ public class MinigameScript : MonoBehaviour
         float minY = -constraints.height / 2;
         for(int i = 0; i < totalTargets; i++){
             if(active){
-                GameObject currTarget = GetTarget();
+                GameObject currTarget = targetPool[i];
                 if(currTarget != null){
                     currTarget.transform.position = transform.position;
                     currTarget.transform.SetParent(panelImage.gameObject.transform);
@@ -63,7 +64,9 @@ public class MinigameScript : MonoBehaviour
             }
             
         }
-
+        if(active){
+            RestoreGameState();
+        }
         yield return null;
     }
     
@@ -78,18 +81,43 @@ public class MinigameScript : MonoBehaviour
         return null;
     }
 
-    public void TargetHit(){
+    void InitializeElements(){
+        for(int i = 0; i < targetAmount; i++){
+            targetPool[i].GetComponent<MinigameTargetScript>().SetElement(targetElement);
+        }
+        for(int i = targetAmount; i < totalTargets; i++){
+            ElementType randomElement = (ElementType)Random.Range(1, 4);
+            targetPool[i].GetComponent<MinigameTargetScript>().SetElement(randomElement);
+        }
+        for (int i = 0; i < totalTargets; i++) {
+            GameObject temp = targetPool[i];
+            int randomIndex = Random.Range(i, totalTargets);
+            targetPool[i] = targetPool[randomIndex];
+            targetPool[randomIndex] = temp;
+        }
+
+    }
+
+    public void TargetHit(ElementType type){
+        if(type != targetElement){
+            RestoreGameState();
+        }
         currentHit++;
         if(currentHit >= targetAmount){
-            active = false;
-            for(int i = 0; i < targetPool.Count; i++){
-                targetPool[i].SetActive(false);
-            }
             player.GetComponent<PlayerController>().Element = targetElement;
-            Destroy(currRune);
-            panelImage.raycastTarget = false;
-            panelImage.color = new Color(panelImage.color.r,panelImage.color.g,panelImage.color.b,0f);
-            Time.timeScale = 1;
+            RestoreGameState();
+            
         }
+    }
+
+    void RestoreGameState(){
+        active = false;
+        for(int i = 0; i < targetPool.Count; i++){
+            targetPool[i].SetActive(false);
+        }
+        Destroy(currRune);
+        panelImage.raycastTarget = false;
+        panelImage.color = new Color(panelImage.color.r,panelImage.color.g,panelImage.color.b,0f);
+        Time.timeScale = 1;
     }
 }
