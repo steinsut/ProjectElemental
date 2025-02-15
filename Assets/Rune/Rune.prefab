@@ -150,5 +150,6 @@ MonoBehaviour:
   runeType: 0
   targetColor: {r: 0, g: 0, b: 0, a: 0}
   spriteRenderer: {fileID: 0}
+  minigamePanel: {fileID: 399648557671900421, guid: ff3da2142700ce545a6e9c09ac0a0de2, type: 3}
   timer: 0
   hitPercent: 0

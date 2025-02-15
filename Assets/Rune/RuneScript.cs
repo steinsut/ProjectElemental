@@ -7,6 +7,7 @@ public class RuneScript : MonoBehaviour
     public ElementType runeType;
     public Color targetColor;
     public SpriteRenderer spriteRenderer;
+    public GameObject minigamePanel;
     public float timer;
     public float hitPercent;
     GameObject player;
@@ -32,14 +33,16 @@ public class RuneScript : MonoBehaviour
                 break;
         }
         player = GameObject.FindGameObjectWithTag("Player");
+        minigamePanel = GameObject.FindGameObjectWithTag("Minigame");
     }
 
     // Update is called once per frame
     void Update()
     {
         if(active && Input.GetKeyDown(KeyCode.F)){
-            player.GetComponent<PlayerController>().Element = runeType;
-            Destroy(gameObject);
+            minigamePanel.SetActive(true);
+            //player.GetComponent<PlayerController>().Element = runeType;
+            //Destroy(gameObject);
         }
     }
 
