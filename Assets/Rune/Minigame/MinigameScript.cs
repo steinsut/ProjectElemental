@@ -34,8 +34,8 @@ public class MinigameScript : MonoBehaviour
         this.currRune = rune;
         this.player = player;
         this.targetAmount = targetAmount;
-        InitializeElements();
         currentHit = 0;
+        InitializeElements();
         panelImage = GetComponentInChildren<Image>();
         panelImage.raycastTarget = true;
         panelImage.color = new Color(panelImage.color.r,panelImage.color.g,panelImage.color.b,0.95f);
@@ -101,12 +101,12 @@ public class MinigameScript : MonoBehaviour
     public void TargetHit(ElementType type){
         if(type != targetElement){
             RestoreGameState();
+            return;
         }
         currentHit++;
         if(currentHit >= targetAmount){
             player.GetComponent<PlayerController>().Element = targetElement;
             RestoreGameState();
-            
         }
     }
 
