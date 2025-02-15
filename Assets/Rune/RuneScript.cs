@@ -6,12 +6,10 @@ public class RuneScript : MonoBehaviour
     [SerializeField]
     public ElementType runeType;
     public Color targetColor;
-    public SpriteRenderer spriteRenderer;
     public GameObject minigamePanel;
-    public float timer;
-    public float hitPercent;
     GameObject player;
-    private float currTime = 0f;
+    public int targetAmount;
+    public int totalAmount;
     private bool active = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -32,6 +30,7 @@ public class RuneScript : MonoBehaviour
             case ElementType.WOOD:
                 break;
         }
+        GetComponent<SpriteRenderer>().color = targetColor;
         player = GameObject.FindGameObjectWithTag("Player");
         minigamePanel = GameObject.FindGameObjectWithTag("Minigame");
     }
@@ -40,7 +39,7 @@ public class RuneScript : MonoBehaviour
     void Update()
     {
         if(active && Input.GetKeyDown(KeyCode.F)){
-            minigamePanel.GetComponent<MinigameScript>().StartMinigame(3, runeType, gameObject, player.GetComponent<PlayerController>());
+            minigamePanel.GetComponent<MinigameScript>().StartMinigame(targetAmount, totalAmount,runeType, gameObject, player.GetComponent<PlayerController>());
             
         }
     }

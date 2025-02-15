@@ -1,5 +1,4 @@
 using GsKit.Extensions;
-using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.ShaderGraph.Internal;
@@ -280,11 +279,15 @@ public class PlayerController : MonoBehaviour
 
             RaycastHit2D jumpQueueHit = Physics2D.Raycast(
                 _collider.bounds.center - new Vector3(0, _collider.bounds.extents.y, 0),
-                transform.up * -1,
+                 transform.up * -1,
                 _jumpQueueSkinWidth,
                 _feetMask);
 
-           _jumpQueued = _canBeMoved && (bool)jumpQueueHit && Input.GetButtonDown("Jump");
+
+            if (!_jumpQueued)
+            {
+                _jumpQueued = _canBeMoved && (bool)jumpQueueHit && Input.GetButtonDown("Jump");
+            }
 
             if (_element == ElementType.AIR)
             {

@@ -735,6 +735,13 @@ MonoBehaviour:
   _dirtMoveSpeed: 2.6
   _dirtAttacks:
   - {fileID: 11400000, guid: 1702a5f8d3cd9db4b91f837508a009c1, type: 2}
+  _fireballPrefab: {fileID: 0}
+  _fireballAnchor: {fileID: 0}
+  _fireballCooldown: 1
+  _fireballCastTime: 1
+  _fireballDamage: 1
+  _fireballSpeed: 1
+  _fireballSpeedDeviation: 0.25
 --- !u!50 &641146404
 Rigidbody2D:
   serializedVersion: 5
@@ -1418,6 +1425,14 @@ PrefabInstance:
       propertyPath: runeType
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 762489156848650441, guid: d09e69b18c313d84ca4a071d73bf82db, type: 3}
+      propertyPath: totalAmount
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 762489156848650441, guid: d09e69b18c313d84ca4a071d73bf82db, type: 3}
+      propertyPath: targetAmount
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2142973143337293379, guid: d09e69b18c313d84ca4a071d73bf82db, type: 3}
       propertyPath: m_Name
       value: Rune (1)
@@ -1686,6 +1701,14 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 762489156848650441, guid: d09e69b18c313d84ca4a071d73bf82db, type: 3}
       propertyPath: runeType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 762489156848650441, guid: d09e69b18c313d84ca4a071d73bf82db, type: 3}
+      propertyPath: totalAmount
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 762489156848650441, guid: d09e69b18c313d84ca4a071d73bf82db, type: 3}
+      propertyPath: targetAmount
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2142973143337293379, guid: d09e69b18c313d84ca4a071d73bf82db, type: 3}

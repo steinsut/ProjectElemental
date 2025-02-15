@@ -11,6 +11,7 @@ public abstract class IEnemy : MonoBehaviour
     [SerializeField]
     protected Rigidbody2D rigidBody;
 
+
     protected virtual void Update()
     {
         if(priority < 4){
@@ -56,12 +57,18 @@ public abstract class IEnemy : MonoBehaviour
         }
     }
 
+    public virtual IEnumerator Stun(float seconds){
+        IncreasePriority(6);
+        yield return new WaitForSeconds(seconds);
+        priority = 0;
+    }
+
     virtual protected void Patrol(){}
 
     abstract protected void EnemyAction(Vector2 Direction);
 
     protected virtual IEnumerator Die(){
-        IncreasePriority(6);
+        IncreasePriority(7);
         yield return new WaitForSeconds(0.1f);
         Destroy(gameObject);
     }
