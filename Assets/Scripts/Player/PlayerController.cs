@@ -1,3 +1,4 @@
+using GsKit.Extensions;
 using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,19 +18,16 @@ public class PlayerController : MonoBehaviour
     private Camera _mainCamera;
 
     [SerializeField]
+    private Quaternion _initialRotation;
+
+    [SerializeField]
     private float _moveSpeed = 1.0f;
 
     [SerializeField]
     private float _dashTime = 1.0f;
 
     [SerializeField]
-    private float _dashSpeed = 1.0f;
-
-    [SerializeField]
     private float _jumpSpeed = 1.0f;
-
-    [SerializeField]
-    private float _doubleJumpSpeed = 1.0f;
 
     [SerializeField]
     private float _ascendingGravity = 1.0f;
@@ -53,16 +51,21 @@ public class PlayerController : MonoBehaviour
     private LayerMask _enemyMask;
 
     [SerializeField]
+    private Transform _mouseAnchor;
+
+    [SerializeField]
+    private Transform _projectileAnchor;
+
+    [Header("Dirt Variant Details")]
+    [SerializeField]
     private float _dirtMoveSpeed = 1.0f;
 
     [SerializeField]
     private PlayerDirtAttack[] _dirtAttacks;
 
+    [Header("Fire Variant Details")]
     [SerializeField]
     private PlayerFireball _fireballPrefab;
-
-    [SerializeField]
-    private Transform _fireballAnchor;
 
     [SerializeField]
     private float _fireballCooldown = 1.0f;
@@ -79,6 +82,19 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float _fireballSpeedDeviation = 0.25f;
 
+    [Header("Air Variant Details")]
+    [SerializeField]
+    private float _doubleJumpSpeed = 1.0f;
+
+    [SerializeField]
+    private float _dashSpeed = 1.0f;
+
+    [SerializeField]
+    private Windblower _windblower;
+
+    [SerializeField]
+    private float _windforce = 1.0f;
+
     private bool _airborne = false;
     private bool _jumpQueued = false;
     private bool _hasDoubleJump = false;
@@ -94,6 +110,8 @@ public class PlayerController : MonoBehaviour
     private Coroutine _currentAttackCoroutine;
 
     private bool _fireballOnCooldown = false;
+
+    private bool _stuckOnWall = false;
 
     public bool Controllable
     {
@@ -119,6 +137,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         _mainCamera = Camera.main;
+        _initialRotation = transform.rotation;
     }
 
     // Update is called once per frame
@@ -139,26 +158,101 @@ public class PlayerController : MonoBehaviour
                 transform.right * Mathf.Sign(vel),
                 _skinWidth,
                 _feetMask);
-            if(!hit)
+            if (!hit)
             {
-                _rb2d.linearVelocityX = vel *
-                    (_element == ElementType.DIRT ? _dirtMoveSpeed : _moveSpeed);
+                if(!_stuckOnWall)
+                {
+                    RaycastHit2D headHit = Physics2D.Raycast(
+                        _collider.bounds.center + new Vector3(0, _collider.bounds.extents.y, 0),
+                        transform.up,
+                        _skinWidth,
+                        _feetMask);
+
+                    if (headHit && Input.GetKey(KeyCode.LeftShift))
+                    {
+                        transform.up *= -1;
+                        _rb2d.gravityScale = 0;
+                        _stuckOnWall = true;
+                    }
+                    else
+                    {
+                        _rb2d.linearVelocityX = vel *
+                            (_element == ElementType.DIRT ? _dirtMoveSpeed : _moveSpeed);
+                    }
+                }
+                else
+                {
+                    if(transform.right.y == 0)
+                    {
+                        _rb2d.linearVelocityY = 0;
+                        _rb2d.linearVelocityX =  vel * _moveSpeed;
+                    }
+                    else
+                    {
+                        _rb2d.linearVelocityX = 0;
+                        _rb2d.linearVelocityY = Input.GetAxis("Vertical") * _moveSpeed;
+                    }
+                }
+            }
+            else
+            {
+                if (_airborne && _element == ElementType.WATER && Input.GetKey(KeyCode.LeftShift))
+                {
+                    transform.right = transform.up * Mathf.Sign(vel);
+                    _rb2d.gravityScale = 0;
+                    _stuckOnWall = true;
+                }
             }
         }
 
-
-        if(_canAttack && Input.GetAxisRaw("Fire1") > 0) 
+        if(_canAttack && Input.GetButtonDown("Fire1")) 
         {
             DoAttack();
+            Vector3 mousePos = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 direction = (mousePos - transform.position).normalized;
+            _mouseAnchor.up = direction;
         }
 
-        RaycastHit2D groundHit = Physics2D.Raycast(
-            _collider.bounds.center - new Vector3(0, _collider.bounds.extents.y, 0), 
-            transform.up * -1, 
-            _skinWidth,
-            _feetMask);
+        else if(!_canAttack && Input.GetButtonUp("Fire1"))
+        {
+            _windblower.Blowing = false;
+        }
+
+        RaycastHit2D groundHit;
+
+        if(!_stuckOnWall)
+        {
+            groundHit = Physics2D.Raycast(
+                _collider.bounds.center - new Vector3(0, _collider.bounds.extents.y, 0), 
+                transform.up * -1, 
+                _skinWidth,
+                _feetMask);
+        }
+        else
+        {
+            if (transform.right.y == 0)
+            {
+                groundHit = Physics2D.Raycast(
+                    _collider.bounds.center - new Vector3(0, -1 * Mathf.Sign(transform.right.x) * _collider.bounds.extents.y, 0),
+                    transform.up * -1,
+                    _skinWidth,
+                    _feetMask);
+                this.LogInfo("DOWN " + transform.up * -1);
+                this.LogInfo("RIGHT " + transform.right);
+                this.LogInfo("ASD " + groundHit);
+            }
+            else
+            {
+                groundHit = Physics2D.Raycast(
+                    _collider.bounds.center - new Vector3(-1 * Mathf.Sign(transform.right.y) * _collider.bounds.extents.x, 0, 0),
+                    transform.up * -1,
+                    _skinWidth,
+                    _feetMask);
+            }
+        }
 
         _airborne = !groundHit;
+
         if (!_airborne)
         {
             _hasDoubleJump = true;
@@ -167,10 +261,23 @@ public class PlayerController : MonoBehaviour
             {
                 _rb2d.linearVelocity = transform.up * _jumpSpeed;
                 _jumpQueued = false;
+                if(_stuckOnWall)
+                {
+                    transform.rotation = _initialRotation;
+                    _rb2d.linearVelocityY = _doubleJumpSpeed;
+                    _stuckOnWall = false;
+                }
             }
         }
         else
         {
+            if(_stuckOnWall)
+            {
+                _rb2d.linearVelocityY = _doubleJumpSpeed;
+                transform.rotation = _initialRotation;
+                _stuckOnWall = false;
+            }
+
             RaycastHit2D jumpQueueHit = Physics2D.Raycast(
                 _collider.bounds.center - new Vector3(0, _collider.bounds.extents.y, 0),
                 transform.up * -1,
@@ -215,7 +322,7 @@ public class PlayerController : MonoBehaviour
             {
                 _dashing = false;
             }
-            if(!_dashing)
+            if(!_dashing && !_stuckOnWall)
             {
                 if (_rb2d.linearVelocityY > 0)
                 {
@@ -226,6 +333,11 @@ public class PlayerController : MonoBehaviour
                     _rb2d.gravityScale = _descendingGravity;
                 }
             }
+        }
+        if(_windblower.Blowing) {
+            Vector3 mousePos = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 direction = (mousePos - transform.position).normalized;
+            _mouseAnchor.up = direction;
         }
     }
 
@@ -308,19 +420,30 @@ public class PlayerController : MonoBehaviour
         _fireballOnCooldown = true;
         yield return new WaitForSeconds(_fireballCastTime);
 
-        Vector3 mousePos = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 fireballDirection = (mousePos - transform.position).normalized;
         float rand = Random.Range(0, 1f) ;
 
-        _fireballAnchor.up = fireballDirection;
-        PlayerFireball fireball = Instantiate<PlayerFireball>(_fireballPrefab, transform.position, Quaternion.identity);
+        PlayerFireball fireball = Instantiate<PlayerFireball>(_fireballPrefab, _projectileAnchor.position, Quaternion.identity);
         fireball.damage = _fireballDamage;
-        fireball.transform.right = fireballDirection;
+        fireball.transform.right = _mouseAnchor.up;
         fireball.velocity = (_fireballSpeed + rand * _fireballSpeedDeviation);
         fireball.velocityDeviation = rand;
 
         yield return new WaitForSeconds(_fireballCooldown);
         _fireballOnCooldown = false;
+    }
+
+    public void PushEnemy(IEnemy enemy) {
+        RaycastHit2D hit = Physics2D.Raycast(
+            _windblower.transform.position,
+            enemy.transform.position - _windblower.transform.position,
+            (enemy.transform.position - _windblower.transform.position).magnitude,
+            _feetMask);
+
+        this.LogInfo(hit);
+        if(!hit)
+        {
+            enemy.Push(_mouseAnchor.up * _windforce);
+        }
     }
 
     public void DoAttack()
@@ -346,6 +469,11 @@ public class PlayerController : MonoBehaviour
                     StopCoroutine(_currentAttackCoroutine);
                 }
                 _currentAttackCoroutine = StartCoroutine(DoFireball());
+                break;
+            case ElementType.AIR:
+                _windblower.Blowing = true;
+                break;
+            case ElementType.WATER:
                 break;
         }
     }
