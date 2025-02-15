@@ -10,8 +10,12 @@ public abstract class IEnemy : MonoBehaviour
     public Vector2 headOffset;
     [SerializeField]
     protected Rigidbody2D rigidBody;
+    protected LayerMask mask;
 
 
+    void Awake(){
+        mask = ~LayerMask.GetMask("Enemy", "Projectile" , "Rune");
+    }
     protected virtual void Update()
     {
         if(priority < 4){
