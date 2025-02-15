@@ -10,8 +10,14 @@ public abstract class IEnemy : MonoBehaviour
 
     protected virtual void Update()
     {
-        if(priority < 2){
-            if(!FindPlayer() && priority <= 0){
+        if(priority < 3){
+            if(FindPlayer()){
+                return;
+            }
+            if(priority >= 2){//Lost track of the player
+                priority = 0;
+            }
+            if(priority <= 0){//If not changing directions, and can't find the player, patrol
                 Patrol();
             }
         }
@@ -34,17 +40,24 @@ public abstract class IEnemy : MonoBehaviour
         return false;
     }
 
+    protected virtual IEnumerator TakeDamage(int damage){
+        priority = 4;
+        yield return new WaitForSeconds(0.5f);
+        health -= damage;
+        if(health <= 0){
+            StartCoroutine(Die());
+        }
+        priority = 0;
+        yield return null;
+    }
+
     virtual protected void Patrol(){}
 
     abstract protected void EnemyAction(Vector2 Direction);
 
-    protected virtual void TakeDamage(int damage){
-        
-        health -= damage;
-        Debug.Log("MeleeEnemy took " + damage + " damage.");
-    }
-
-    protected virtual void Die(){
+    protected virtual IEnumerator Die(){
+        priority = 5;
+        yield return new WaitForSeconds(0.1f);
         Destroy(gameObject);
     }
     

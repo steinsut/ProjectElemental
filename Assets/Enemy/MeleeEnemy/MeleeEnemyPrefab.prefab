@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5835007677231199302}
   - component: {fileID: 1204699791767306646}
   - component: {fileID: 3637295240865831655}
+  - component: {fileID: 5611521435949873271}
   m_Layer: 10
   m_Name: MeleeEnemyPrefab
   m_TagString: Enemy
@@ -107,8 +108,8 @@ MonoBehaviour:
   headOffset: {x: 0, y: 0.2}
   speed: 1
   rigidBody: {fileID: 1204699791767306646}
-  feetOffset: {x: 0, y: -0.2}
-  jumpAmount: 3
+  feetOffset: {x: 0, y: -0.1}
+  jumpAmount: 200
   patrolRange: 3
 --- !u!50 &1204699791767306646
 Rigidbody2D:
@@ -183,3 +184,39 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!58 &5611521435949873271
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5191022251090970881}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 1024
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: -0.83131325, y: -0.4025862}
+  m_Radius: 0.07649915

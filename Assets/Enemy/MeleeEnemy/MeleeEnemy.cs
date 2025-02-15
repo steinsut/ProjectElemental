@@ -15,6 +15,8 @@ public class MeleeEnemy : IEnemy
     Vector2 patrolTarget;
 
     protected override void EnemyAction(Vector2 Direction){
+        priority = 2;
+        patrolTarget = Vector2.zero;
         if (Direction.magnitude < 0.5f)
         {
             StartCoroutine(Attack());
@@ -22,19 +24,20 @@ public class MeleeEnemy : IEnemy
         LayerMask mask = ~LayerMask.GetMask("Enemy");
         RaycastHit2D raycast = Physics2D.Raycast(transform.position + (Vector3) feetOffset, -transform.right, 0.5f, mask);
         RaycastHit2D floorRaycast = Physics2D.Raycast(transform.position + (Vector3) feetOffset, Vector2.down, 0.1f, mask);
-        if(raycast.collider != null && raycast.collider.gameObject.tag != "Player" && floorRaycast.collider != null){
-            rigidBody.linearVelocityY = jumpAmount;
-        }
+        //Debug.Log(floorRaycast.collider == null);
+        //if(raycast.collider != null && raycast.collider.gameObject.tag != "Player" && floorRaycast.collider != null){
+         //   rigidBody.linearVelocityY = jumpAmount;
+        //}
         
         Vector2 directionX = new Vector2(Direction.x, 0);
-        rigidBody.linearVelocityX = directionX.normalized.x * speed;
+        Move(directionX.normalized);
         
     }
 
 
     IEnumerator Attack()
     {
-        priority = 2;
+        priority = 3;
         Debug.Log("Attack player.");
         //Swing animation
         yield return new WaitForSeconds(0.3f);
@@ -45,18 +48,41 @@ public class MeleeEnemy : IEnemy
     {
         if(patrolTarget == Vector2.zero){
             LayerMask mask = ~LayerMask.GetMask("Enemy");
-            RaycastHit2D raycast = Physics2D.Raycast(transform.position, Random.Range(0,1) < 0.5f?transform.right:-transform.right, patrolRange, mask);
-            patrolTarget = raycast.point;
+            Vector2 direction = Random.Range(0,1) < 0.5f?transform.right:-transform.right;
+            RaycastHit2D raycast = Physics2D.Raycast(transform.position + (Vector3) feetOffset, direction, patrolRange, mask);
+            Vector2 target;
+            if(raycast.collider == null){
+                target = transform.position + (Vector3) feetOffset + (Vector3)direction * patrolRange;
+            }else{
+                target = raycast.point;
+            }
+            StartCoroutine(ChangePatrolDirection(target));
         }
         if((transform.position - (Vector3)patrolTarget).magnitude < 0.5f){
             LayerMask mask = ~LayerMask.GetMask("Enemy");
-            RaycastHit2D raycast = Physics2D.Raycast(transform.position, transform.position - (Vector3)patrolTarget, patrolRange, mask);
-            StartCoroutine(ChangePatrolDirection(raycast.point));
+            Vector2 direction = new Vector2((transform.position - (Vector3)patrolTarget).x, 0).normalized; 
+            RaycastHit2D raycast = Physics2D.Raycast(transform.position + (Vector3) feetOffset, 
+                direction, patrolRange, mask);
+            Vector2 target;
+            if(raycast.collider == null){
+                target = transform.position + (Vector3)direction * patrolRange;
+            }else{
+                target = raycast.point;
+            }
+            StartCoroutine(ChangePatrolDirection(target));
         }
-        Vector2 directionX = new Vector2(((Vector3) patrolTarget - transform.position).x, 0);
-        rigidBody.linearVelocityX = directionX.normalized.x * speed;
+        Vector2 directionX = new Vector2(((Vector3) patrolTarget - (transform.position+ (Vector3) feetOffset)).x, 0);
+        Move(directionX.normalized);
         return;
 
+    }
+
+    void Move(Vector2 directionX){
+        if(Vector2.Dot(directionX, transform.right) > 0){
+                transform.Rotate(new Vector3(0,180,0));
+        }
+        rigidBody.linearVelocityX = directionX.x * speed;
+        
     }
 
     IEnumerator ChangePatrolDirection(Vector2 target){
@@ -66,6 +92,13 @@ public class MeleeEnemy : IEnemy
         patrolTarget = target;
         priority = 0;
         yield return null;
+    }
+
+    void OnTriggerEnter2D(Collider2D col){
+        Debug.Log(priority);
+        if(priority >= 2){
+            rigidBody.AddForce(Vector2.up * jumpAmount);
+        }
     }
 
 }
