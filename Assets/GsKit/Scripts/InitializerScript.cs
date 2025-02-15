@@ -7,6 +7,7 @@ using GsKit.Audio;
 using GsKit.Pooling;
 using GsKit.Resources;
 using GsKit.Settings;
+using UnityEngine.SceneManagement;
 
 namespace GsKit
 {
@@ -23,6 +24,9 @@ namespace GsKit
         [SerializeField]
         [Tooltip("GsKit settings. You can change this directly to use different presets.")]
         private GsSettings _settings;
+
+        [SerializeField]
+        private string _targetScene; 
 
         private int _poolCount = 0;
         private int _poolsPopulated = 0;
@@ -81,9 +85,7 @@ namespace GsKit
                     _statusText.text = "Done!";
                     _statusText.color = Color.green;
                     _resourcesLoaded = false;
-                    Pool pool = _poolService.GetPool("pool_audio_player");
-                    Pool.Object poolObj = pool.GetNextObject();
-                    AudioPlayer audioPlayer = poolObj.GetComponent<AudioPlayer>();
+                    SceneManager.LoadSceneAsync(_targetScene);
                 }
         }
 

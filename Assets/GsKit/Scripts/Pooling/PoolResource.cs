@@ -33,6 +33,10 @@ namespace GsKit.Pooling
         [SerializeField]
         private bool _resetOnReturn;
 
+        [Tooltip("Don't destroy pool objects when a new scene is loaded.")]
+        [SerializeField]
+        private bool _dontDestroyOnLoad;
+
         [SerializeField]
         [HideInInspector]
         private int _componentMask;
@@ -45,6 +49,7 @@ namespace GsKit.Pooling
         public bool ResetOnReturn => _resetOnReturn;
 
         public bool PopulateOnLoad => _populateOnLoad;
+        public bool PreserveOnSceneLoad => _dontDestroyOnLoad;
 
         public int ComponentMask => _componentMask;
     }

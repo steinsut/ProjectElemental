@@ -29,7 +29,7 @@ public abstract class IEnemy : MonoBehaviour
         LayerMask mask = ~LayerMask.GetMask("Enemy");
         RaycastHit2D raycast = Physics2D.Raycast(transform.position + (Vector3) headOffset, (player.transform.position - transform.position).normalized, 100f, mask);
 
-        if(raycast.collider != null && raycast.collider.gameObject.tag == "Player"){
+        if(raycast.collider != null && raycast.collider.gameObject.CompareTag("Player")){
             Vector2 Direction = player.transform.position - transform.position;
             if(Vector2.Dot(Direction, transform.right) > 0){
                     transform.Rotate(new Vector3(0,180,0));

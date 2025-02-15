@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b40f2c8ba141907418c73fe2c451199a, type: 3}
-  m_Name: AudioPlayerPool
+  m_Name: Bullet Pool
   m_EditorClassIdentifier: 
-  _resourceID: pool_audio_player
-  _prefabResource: {fileID: 11400000, guid: a44c8e8ac5daa8947b2321fcab89d366, type: 2}
-  _minimumObjects: 3
+  _resourceID: 
+  _prefabResource: {fileID: 11400000, guid: 6e3816c5b8ef4124b98f4a31234a1dbe, type: 2}
+  _minimumObjects: 0
   _limitObjectCount: 0
-  _maximumObjects: 5
-  _populateOnLoad: 1
+  _maximumObjects: 0
+  _populateOnLoad: 0
   _resetOnReturn: 0
-  _dontDestroyOnLoad: 1
-  _componentMask: 6
+  _dontDestroyOnLoad: 0
+  _componentMask: 0

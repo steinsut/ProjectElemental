@@ -123,6 +123,10 @@ namespace GsKit.Pooling
             GameObject prefab = _poolResource.PrefabResource.Prefab;
 
             _parent = new GameObject($"{prefab.name} Pool");
+            if(_poolResource.PreserveOnSceneLoad)
+            {
+                UObject.DontDestroyOnLoad(_parent);
+            }
 
             MinObjectCount = _poolResource.MinimumObjects;
             MaxObjectCount = _poolResource.MaximumObjects;
@@ -169,7 +173,8 @@ namespace GsKit.Pooling
             Guid guid = Guid.Empty;
             if (_objectGuidQueue.Count != 0) guid = _objectGuidQueue.Dequeue();
 
-            if (_objects.Count >= _maxObjectCount && !_limitObjectCount)
+            if (_objects.Count >= _maxObjectCount && !_limitObjectCount
+                || _objects.Count < _maxObjectCount)
             {
                 AddNewObjectToPool();
                 guid = _objectGuidQueue.Dequeue();
