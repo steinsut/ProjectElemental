@@ -1,82 +1,34 @@
 fileFormatVersion: 2
-guid: 357f4a98f3449de4c8d6eafd874cb776
+guid: c2157258c496292498923e756f0f6783
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 9100320460688023021
-    second: Fire-wall_0
+      213: 6937817954938267909
+    second: 2_0
   - first:
-      213: -5041242610737721168
-    second: Fire-wall_1
+      213: 3191122964850554743
+    second: 2_1
   - first:
-      213: 6398825219080102098
-    second: Fire-wall_2
+      213: 5382512944479897801
+    second: 2_2
   - first:
-      213: -6929608371103195048
-    second: Fire-wall_3
+      213: -5515383189529662604
+    second: 2_3
   - first:
-      213: -2486791227363307004
-    second: Fire-wall_4
+      213: -3926759211464601419
+    second: 2_4
   - first:
-      213: -7162859542000224459
-    second: Fire-wall_5
+      213: -4424780041397978121
+    second: 2_5
   - first:
-      213: 4093813459348738529
-    second: Fire-wall_6
+      213: 8817454751965551104
+    second: 2_6
   - first:
-      213: -6658636169905161913
-    second: Fire-wall_7
+      213: 3974921216390489406
+    second: 2_7
   - first:
-      213: 6596653287336491103
-    second: Fire-wall_8
-  - first:
-      213: -2471717494190933292
-    second: Fire-wall_9
-  - first:
-      213: -7831166640683110774
-    second: Fire-wall_10
-  - first:
-      213: -91531105072851231
-    second: Fire-wall_11
-  - first:
-      213: -983225450852797147
-    second: Fire-wall_12
-  - first:
-      213: -295643710352709559
-    second: Fire-wall_13
-  - first:
-      213: -6405922803447565017
-    second: Fire-wall_14
-  - first:
-      213: -6036230756219703045
-    second: Fire-wall_15
-  - first:
-      213: -2877872471998237260
-    second: Fire-wall_16
-  - first:
-      213: 103604253952791109
-    second: Fire-wall_17
-  - first:
-      213: -343163117323874417
-    second: Fire-wall_18
-  - first:
-      213: -5871337941029148165
-    second: Fire-wall_19
-  - first:
-      213: -4607718688271203002
-    second: Fire-wall_20
-  - first:
-      213: 641624354503539359
-    second: Fire-wall_21
-  - first:
-      213: -8311045787295733327
-    second: Fire-wall_22
-  - first:
-      213: 5149164372809844020
-    second: Fire-wall_23
-  - first:
-      213: 6657638653967230745
-    second: Fire-wall_24
+      213: -779157609879621035
+    second: 2_8
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -109,7 +61,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -172,13 +124,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Fire-wall_0
+      name: 2_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 72
-        height: 72
+        width: 33
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,20 +139,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ded57815e35da4e70800000000000000
-      internalID: 9100320460688023021
+      spriteID: 5092c600ca4184060800000000000000
+      internalID: 6937817954938267909
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fire-wall_1
+      name: 2_1
       rect:
         serializedVersion: 2
-        x: 72
+        x: 39
         y: 0
-        width: 72
-        height: 72
+        width: 26
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -209,20 +161,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0b05a602e88e90ab0800000000000000
-      internalID: -5041242610737721168
+      spriteID: 7773282ed65294c20800000000000000
+      internalID: 3191122964850554743
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fire-wall_2
+      name: 2_2
       rect:
         serializedVersion: 2
-        x: 144
+        x: 66
         y: 0
-        width: 72
-        height: 72
+        width: 31
+        height: 18
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -231,20 +183,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2d0a41362a13dc850800000000000000
-      internalID: 6398825219080102098
+      spriteID: 9c88aa6510782ba40800000000000000
+      internalID: 5382512944479897801
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fire-wall_3
+      name: 2_3
       rect:
         serializedVersion: 2
-        x: 216
+        x: 96
         y: 0
-        width: 72
-        height: 72
+        width: 33
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -253,20 +205,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 85022dfa6e515df90800000000000000
-      internalID: -6929608371103195048
+      spriteID: 47b6cebf53c6573b0800000000000000
+      internalID: -5515383189529662604
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fire-wall_4
+      name: 2_4
       rect:
         serializedVersion: 2
-        x: 288
+        x: 128
         y: 0
-        width: 72
-        height: 72
+        width: 64
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -275,20 +227,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 402d376ed842d7dd0800000000000000
-      internalID: -2486791227363307004
+      spriteID: 5b0d8225d495189c0800000000000000
+      internalID: -3926759211464601419
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fire-wall_5
+      name: 2_5
       rect:
         serializedVersion: 2
-        x: 360
-        y: 0
-        width: 72
-        height: 72
+        x: 184
+        y: 17
+        width: 7
+        height: 7
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -297,20 +249,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5373f0f6239689c90800000000000000
-      internalID: -7162859542000224459
+      spriteID: 7fb3c3feef50892c0800000000000000
+      internalID: -4424780041397978121
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fire-wall_6
+      name: 2_6
       rect:
         serializedVersion: 2
-        x: 432
-        y: 0
-        width: 72
-        height: 72
+        x: 33
+        y: 6
+        width: 6
+        height: 6
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -319,20 +271,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1e1d13db6a520d830800000000000000
-      internalID: 4093813459348738529
+      spriteID: 00a9cf94164ed5a70800000000000000
+      internalID: 8817454751965551104
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fire-wall_7
+      name: 2_7
       rect:
         serializedVersion: 2
-        x: 504
+        x: 32
         y: 0
-        width: 72
-        height: 72
+        width: 8
+        height: 5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -341,20 +293,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7493c34bea5c793a0800000000000000
-      internalID: -6658636169905161913
+      spriteID: e356e1949c1c92730800000000000000
+      internalID: 3974921216390489406
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fire-wall_8
+      name: 2_8
       rect:
         serializedVersion: 2
-        x: 576
+        x: 64
         y: 0
-        width: 72
-        height: 72
+        width: 8
+        height: 5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -363,30 +315,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f58ba1ad6350c8b50800000000000000
-      internalID: 6596653287336491103
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Fire-wall_9
-      rect:
-        serializedVersion: 2
-        x: 648
-        y: 0
-        width: 72
-        height: 72
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 4da71a5e802b2bdd0800000000000000
-      internalID: -2471717494190933292
+      spriteID: 552351f2840ef25f0800000000000000
+      internalID: -779157609879621035
       vertices: []
       indices: 
       edges: []
@@ -395,7 +325,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: f0c26bde73928944e83ce6c75804f43d
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -404,17 +334,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Fire-wall_0: 9100320460688023021
-      Fire-wall_1: -5041242610737721168
-      Fire-wall_2: 6398825219080102098
-      Fire-wall_3: -6929608371103195048
-      Fire-wall_4: -2486791227363307004
-      Fire-wall_5: -7162859542000224459
-      Fire-wall_6: 4093813459348738529
-      Fire-wall_7: -6658636169905161913
-      Fire-wall_8: 6596653287336491103
-      Fire-wall_9: -2471717494190933292
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
