@@ -40,9 +40,8 @@ public class RuneScript : MonoBehaviour
     void Update()
     {
         if(active && Input.GetKeyDown(KeyCode.F)){
-            minigamePanel.SetActive(true);
-            //player.GetComponent<PlayerController>().Element = runeType;
-            //Destroy(gameObject);
+            minigamePanel.GetComponent<MinigameScript>().StartMinigame(3, runeType, gameObject, player.GetComponent<PlayerController>());
+            
         }
     }
 

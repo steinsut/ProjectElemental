@@ -58,7 +58,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -115,6 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 904e13414cc1d0f4a99b920ea4f56071, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minigameTarget: {fileID: 8105456822596261852, guid: 6cca0c46661c22c48a5f8102c457e99f, type: 3}
 --- !u!1 &3878388513315035970
 GameObject:
   m_ObjectHideFlags: 0
@@ -142,7 +143,7 @@ RectTransform:
   m_GameObject: {fileID: 3878388513315035970}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.56894606, y: 0.43431, z: 0.43431}
+  m_LocalScale: {x: 0.71374285, y: 0.5448419, z: 0.5448419}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4839839380174353198}
@@ -173,8 +174,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.3584906, g: 0.21387343, b: 0.1237807, a: 0.98039216}
-  m_RaycastTarget: 1
+  m_Color: {r: 0.3584906, g: 0.21387343, b: 0.1237807, a: 0}
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:

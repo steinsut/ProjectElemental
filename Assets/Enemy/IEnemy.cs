@@ -48,10 +48,12 @@ public abstract class IEnemy : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         health -= damage;
         if(health <= 0){
-            StartCoroutine(Die());
+            yield return Die();
+        }else{
+                
+            priority = 0;
+            yield return null;
         }
-        priority = 0;
-        yield return null;
     }
 
     virtual protected void Patrol(){}
