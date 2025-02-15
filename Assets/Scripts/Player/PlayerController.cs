@@ -58,6 +58,27 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private PlayerDirtAttack[] _dirtAttacks;
 
+    [SerializeField]
+    private PlayerFireball _fireballPrefab;
+
+    [SerializeField]
+    private Transform _fireballAnchor;
+
+    [SerializeField]
+    private float _fireballCooldown = 1.0f;
+
+    [SerializeField]
+    private float _fireballCastTime = 1.0f;
+
+    [SerializeField]
+    private int _fireballDamage = 1;
+
+    [SerializeField]
+    private float _fireballSpeed = 1.0f;
+
+    [SerializeField]
+    private float _fireballSpeedDeviation = 0.25f;
+
     private bool _airborne = false;
     private bool _jumpQueued = false;
     private bool _hasDoubleJump = false;
@@ -71,6 +92,8 @@ public class PlayerController : MonoBehaviour
 
     private int _currentAttack;
     private Coroutine _currentAttackCoroutine;
+
+    private bool _fireballOnCooldown = false;
 
     public bool Controllable
     {
@@ -126,7 +149,6 @@ public class PlayerController : MonoBehaviour
 
         if(_canAttack && Input.GetAxisRaw("Fire1") > 0) 
         {
-            _rb2d.linearVelocityX = 0;
             DoAttack();
         }
 
@@ -207,6 +229,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void ToggleMovementControls()
+    {
+        _canBeMoved = !_canBeMoved;
+    }
+
+    public void ToggleAttackControls()
+    {
+        _canAttack = !_canAttack;
+    }
+
     private IEnumerator DoDirtAttack(PlayerDirtAttack attack)
     {
         Vector2 mousePos = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
@@ -271,14 +303,24 @@ public class PlayerController : MonoBehaviour
         _canBeMoved = true;
     }
 
-    public void ToggleMovementControls()
+    private IEnumerator DoFireball()
     {
-        _canBeMoved = !_canBeMoved;
-    }
+        _fireballOnCooldown = true;
+        yield return new WaitForSeconds(_fireballCastTime);
 
-    public void ToggleAttackControls()
-    {
-        _canAttack = !_canAttack;
+        Vector3 mousePos = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 fireballDirection = (mousePos - transform.position).normalized;
+        float rand = Random.Range(0, 1f) ;
+
+        _fireballAnchor.up = fireballDirection;
+        PlayerFireball fireball = Instantiate<PlayerFireball>(_fireballPrefab, transform.position, Quaternion.identity);
+        fireball.damage = _fireballDamage;
+        fireball.transform.right = fireballDirection;
+        fireball.velocity = (_fireballSpeed + rand * _fireballSpeedDeviation);
+        fireball.velocityDeviation = rand;
+
+        yield return new WaitForSeconds(_fireballCooldown);
+        _fireballOnCooldown = false;
     }
 
     public void DoAttack()
@@ -286,10 +328,8 @@ public class PlayerController : MonoBehaviour
         switch(_element)
         {
             case ElementType.DIRT:
-                if(_dirtAttacks == null || _dirtAttacks.Length == 0)
-                {
-                    break;
-                }
+                _rb2d.linearVelocityX = 0;
+                if(_dirtAttacks == null || _dirtAttacks.Length == 0) break;
                 _canBeMoved = false;
                 _canAttack = false;
                 if (_currentAttackCoroutine != null)
@@ -298,6 +338,14 @@ public class PlayerController : MonoBehaviour
                 }
                 _currentAttackCoroutine = StartCoroutine(DoDirtAttack(_dirtAttacks[_currentAttack % _dirtAttacks.Length]));
                 _currentAttack++;
+                break;
+            case ElementType.FIRE:
+                if (_fireballOnCooldown) break;
+                if(_currentAttackCoroutine != null)
+                {
+                    StopCoroutine(_currentAttackCoroutine);
+                }
+                _currentAttackCoroutine = StartCoroutine(DoFireball());
                 break;
         }
     }
