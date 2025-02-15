@@ -8,7 +8,8 @@ public abstract class IEnemy : MonoBehaviour
     protected int priority = 0;
     public GameObject player;
     public Vector2 headOffset;
-    public Rigidbody2D rigidBody;
+    [SerializeField]
+    protected Rigidbody2D rigidBody;
 
     protected virtual void Update()
     {
@@ -61,6 +62,10 @@ public abstract class IEnemy : MonoBehaviour
         priority = 5;
         yield return new WaitForSeconds(0.1f);
         Destroy(gameObject);
+    }
+
+    public void Push(Vector2 force){
+        rigidBody.AddForce(force, ForceMode2D.Force);
     }
     
 }
