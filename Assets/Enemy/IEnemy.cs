@@ -40,7 +40,7 @@ public abstract class IEnemy : MonoBehaviour
         return false;
     }
 
-    protected virtual IEnumerator TakeDamage(int damage){
+    public virtual IEnumerator TakeDamage(int damage){
         priority = 4;
         yield return new WaitForSeconds(0.5f);
         health -= damage;

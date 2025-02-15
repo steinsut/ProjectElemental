@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b40f2c8ba141907418c73fe2c451199a, type: 3}
   m_Name: Bullet Pool
   m_EditorClassIdentifier: 
-  _resourceID: 
+  _resourceID: pool_bullet
   _prefabResource: {fileID: 11400000, guid: 6e3816c5b8ef4124b98f4a31234a1dbe, type: 2}
-  _minimumObjects: 0
-  _limitObjectCount: 0
-  _maximumObjects: 0
+  _minimumObjects: 100
+  _limitObjectCount: 1
+  _maximumObjects: 100
   _populateOnLoad: 0
   _resetOnReturn: 0
   _dontDestroyOnLoad: 0
-  _componentMask: 0
+  _componentMask: -1

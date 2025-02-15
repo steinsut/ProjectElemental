@@ -46,6 +46,5 @@ public class CursorController : MonoBehaviour
         {
             _lineRenderer.material.SetFloat(materialDirectionId, pos1.y - pos0.y > 0 ? 1 : -1);
         }
-        Debug.Log(_lineRenderer.bounds);
     }
 }
