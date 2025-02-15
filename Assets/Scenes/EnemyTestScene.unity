@@ -799,7 +799,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 3.6
+  orthographic size: 2.4
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1335,6 +1335,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RangedEnemyPrefab
       objectReference: {fileID: 0}
+    - target: {fileID: 247699596390843848, guid: ef5cc52ac52c3d0429d934edc0f4d09f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7001224071575912117, guid: ef5cc52ac52c3d0429d934edc0f4d09f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.5167537
@@ -1650,7 +1654,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5191022251090970881, guid: 5db7e9d38e92c274da8ee268748dccf1, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5835007677231199302, guid: 5db7e9d38e92c274da8ee268748dccf1, type: 3}
       propertyPath: player
