@@ -8,7 +8,6 @@ using Vector3 = UnityEngine.Vector3;
 public class BomberEnemy : IEnemy
 {
     public float speed;
-    public Rigidbody2D rigidBody;
 
     public float patrolRange;
     Vector2 patrolTarget;
@@ -16,7 +15,7 @@ public class BomberEnemy : IEnemy
     protected override void EnemyAction(Vector2 Direction){
         priority = 2;
         patrolTarget = Vector2.zero;
-        if (Direction.x < 0.3f)
+        if (Mathf.Abs(Direction.x) < 0.3f)
         {
             StartCoroutine(Shoot());
         }
@@ -33,6 +32,7 @@ public class BomberEnemy : IEnemy
     {
         priority = 3;
         rigidBody.linearVelocity = Vector2.zero;
+        yield return new WaitForSeconds(0.5f);
         for (int i = -2; i <= 2; i++)
         {
             GameObject bomb = ProjectilePooling.SingletonInstance.GetBomb();
@@ -46,7 +46,7 @@ public class BomberEnemy : IEnemy
                 bomb.SetActive(true);
             }
         }
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
         priority = 0;
         
     }

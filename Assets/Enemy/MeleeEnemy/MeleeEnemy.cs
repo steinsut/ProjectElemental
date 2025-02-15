@@ -7,7 +7,6 @@ using Vector3 = UnityEngine.Vector3;
 public class MeleeEnemy : IEnemy
 {
     public float speed;
-    public Rigidbody2D rigidBody;
     public Vector2 feetOffset;
     public float jumpAmount;
 

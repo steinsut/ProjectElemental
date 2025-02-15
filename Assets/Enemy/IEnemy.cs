@@ -1,12 +1,14 @@
 using System.Collections;
 using UnityEngine;
 
+[RequireComponent (typeof (Rigidbody2D))]
 public abstract class IEnemy : MonoBehaviour
 {
     public int health;
     protected int priority = 0;
     public GameObject player;
     public Vector2 headOffset;
+    public Rigidbody2D rigidBody;
 
     protected virtual void Update()
     {
