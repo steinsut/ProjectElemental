@@ -16,7 +16,7 @@ public class RangedEnemy : IEnemy
 
     IEnumerator Shoot(Vector2 Direction)
     {
-        priority = 3;
+        IncreasePriority(4);
         GameObject projectile = ProjectilePooling.SingletonInstance.GetProjectile();
         if(projectile != null){
             projectile.transform.position = weaponPrefab.transform.position;

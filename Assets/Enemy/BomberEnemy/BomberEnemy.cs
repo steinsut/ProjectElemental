@@ -13,7 +13,7 @@ public class BomberEnemy : IEnemy
     Vector2 patrolTarget;
 
     protected override void EnemyAction(Vector2 Direction){
-        priority = 2;
+        IncreasePriority(3);
         patrolTarget = Vector2.zero;
         if (Mathf.Abs(Direction.x) < 0.3f)
         {
@@ -30,7 +30,7 @@ public class BomberEnemy : IEnemy
 
     IEnumerator Shoot()
     {
-        priority = 3;
+        IncreasePriority(4);
         rigidBody.linearVelocity = Vector2.zero;
         yield return new WaitForSeconds(0.5f);
         for (int i = -2; i <= 2; i++)
@@ -88,12 +88,14 @@ public class BomberEnemy : IEnemy
         if(Vector2.Dot(directionX, transform.right) > 0){
                 transform.Rotate(new Vector3(0,180,0));
         }
-        rigidBody.linearVelocityX = directionX.x * speed;
+        
+        if(Mathf.Abs(rigidBody.linearVelocityX) < Mathf.Abs(directionX.x * speed))
+            rigidBody.AddForceX(directionX.x * speed);
         
     }
 
     IEnumerator ChangePatrolDirection(Vector2 target){
-        priority = 1;
+        IncreasePriority(1);
         rigidBody.linearVelocityX = 0;
         yield return new WaitForSeconds(1f);
         patrolTarget = target;
