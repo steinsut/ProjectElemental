@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - Coin
+  - Minigame
   - Wall
   layers:
   - Default
@@ -20,7 +21,7 @@ TagManager:
   - 
   - Enemy
   - Projectile
-  - 
+  - Rune
   - 
   - 
   - 

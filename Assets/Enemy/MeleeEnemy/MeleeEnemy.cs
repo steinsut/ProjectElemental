@@ -7,7 +7,6 @@ using Vector3 = UnityEngine.Vector3;
 public class MeleeEnemy : IEnemy
 {
     public float speed;
-    public Rigidbody2D rigidBody;
     public Vector2 feetOffset;
     public float jumpAmount;
 
@@ -15,7 +14,7 @@ public class MeleeEnemy : IEnemy
     Vector2 patrolTarget;
 
     protected override void EnemyAction(Vector2 Direction){
-        priority = 2;
+        IncreasePriority(3);
         patrolTarget = Vector2.zero;
         if (Direction.magnitude < 0.5f)
         {
@@ -32,7 +31,7 @@ public class MeleeEnemy : IEnemy
 
     IEnumerator Attack()
     {
-        priority = 3;
+        IncreasePriority(4);
         rigidBody.linearVelocity = Vector2.zero;
         Debug.Log("Attack player.");
         //Swing animation
@@ -77,12 +76,13 @@ public class MeleeEnemy : IEnemy
         if(Vector2.Dot(directionX, transform.right) > 0){
                 transform.Rotate(new Vector3(0,180,0));
         }
-        rigidBody.linearVelocityX = directionX.x * speed;
+        if(Mathf.Abs(rigidBody.linearVelocityX) < Mathf.Abs(directionX.x * speed))
+            rigidBody.AddForceX(directionX.x * speed);
         
     }
 
     IEnumerator ChangePatrolDirection(Vector2 target){
-        priority = 1;
+        IncreasePriority(1);
         rigidBody.linearVelocityX = 0;
         yield return new WaitForSeconds(1f);
         patrolTarget = target;

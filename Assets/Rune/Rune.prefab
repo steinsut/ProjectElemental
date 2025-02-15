@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2009837687189382613
+--- !u!1 &2142973143337293379
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,40 +8,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3242596178012144595}
-  - component: {fileID: 337019382228740890}
-  - component: {fileID: 3806139290426885047}
-  - component: {fileID: 8097556197895088832}
-  - component: {fileID: 3478654619195790518}
-  m_Layer: 10
-  m_Name: BomberEnemy
-  m_TagString: Enemy
+  - component: {fileID: 4056244426601165296}
+  - component: {fileID: 6775580846117001004}
+  - component: {fileID: 7674000891638336617}
+  - component: {fileID: 762489156848650441}
+  m_Layer: 12
+  m_Name: Rune
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3242596178012144595
+--- !u!4 &4056244426601165296
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2009837687189382613}
+  m_GameObject: {fileID: 2142973143337293379}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.21, y: 2.47, z: 0}
-  m_LocalScale: {x: 0.5700992, y: 0.5700992, z: 0.5700992}
+  m_LocalPosition: {x: 1.81, y: 0.05, z: 0}
+  m_LocalScale: {x: 0.29997, y: 0.29997, z: 0.29997}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &337019382228740890
+--- !u!212 &6775580846117001004
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2009837687189382613}
+  m_GameObject: {fileID: 2142973143337293379}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -79,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -90,31 +89,13 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3806139290426885047
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2009837687189382613}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3110af03f50ae046ae31de0f06417fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 5
-  player: {fileID: 0}
-  headOffset: {x: 0, y: 0}
-  rigidBody: {fileID: 3478654619195790518}
-  speed: 1
-  patrolRange: 3
---- !u!61 &8097556197895088832
+--- !u!61 &7674000891638336617
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2009837687189382613}
+  m_GameObject: {fileID: 2142973143337293379}
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
@@ -138,7 +119,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -152,32 +133,23 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.5, y: 2.5}
   m_EdgeRadius: 0
---- !u!50 &3478654619195790518
-Rigidbody2D:
-  serializedVersion: 5
+--- !u!114 &762489156848650441
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2009837687189382613}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 7168
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
+  m_GameObject: {fileID: 2142973143337293379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7d6c76c5bb594044b74848b0170dbd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  runeType: 0
+  targetColor: {r: 0, g: 0, b: 0, a: 0}
+  spriteRenderer: {fileID: 0}
+  minigamePanel: {fileID: 399648557671900421, guid: ff3da2142700ce545a6e9c09ac0a0de2, type: 3}
+  timer: 0
+  hitPercent: 0

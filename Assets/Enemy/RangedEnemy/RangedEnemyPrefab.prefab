@@ -106,7 +106,7 @@ MonoBehaviour:
   health: 1
   player: {fileID: 0}
   headOffset: {x: 0, y: 0.1}
-  projectilePrefab: {fileID: 8807617550778883883, guid: 3b2d6df5932fa194dbf6f66c0d386aea, type: 3}
+  rigidBody: {fileID: 8452071738070688009}
   weaponPrefab: {fileID: 6827733943754080128}
 --- !u!61 &4556832890138427929
 BoxCollider2D:
@@ -176,7 +176,7 @@ Rigidbody2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 1280
+    m_Bits: 7424
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
