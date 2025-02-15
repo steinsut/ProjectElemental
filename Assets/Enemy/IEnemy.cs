@@ -11,10 +11,13 @@ public abstract class IEnemy : MonoBehaviour
     [SerializeField]
     protected Rigidbody2D rigidBody;
     protected LayerMask mask;
+    public Animator animator;
 
+    protected abstract int GetDeathAnim();
+    protected abstract int GetHurtAnim();
 
     void Awake(){
-        mask = ~LayerMask.GetMask("Enemy", "Projectile" , "Rune");
+        mask = ~LayerMask.GetMask("Enemy", "EnemyProjectile" , "Rune", "Player");
     }
     protected virtual void Update()
     {
@@ -34,7 +37,7 @@ public abstract class IEnemy : MonoBehaviour
     }
 
     bool FindPlayer(){
-        LayerMask mask = ~LayerMask.GetMask("Enemy");
+        LayerMask mask = ~LayerMask.GetMask("Enemy", "EnemyProjectile" , "Rune");
         RaycastHit2D raycast = Physics2D.Raycast(transform.position + (Vector3) headOffset, (player.transform.position - transform.position).normalized, 100f, mask);
 
         if(raycast.collider != null && raycast.collider.gameObject.CompareTag("Player")){
@@ -49,22 +52,26 @@ public abstract class IEnemy : MonoBehaviour
     }
 
     public virtual IEnumerator TakeDamage(int damage){
-        IncreasePriority(5);
-        yield return new WaitForSeconds(0.5f);
-        health -= damage;
-        if(health <= 0){
-            yield return Die();
-        }else{
-                
-            priority = 0;
-            yield return null;
+        if(IncreasePriority(5)){
+            
+            health -= damage;
+            if(health <= 0){
+                yield return Die();
+            }else{
+                animator.CrossFade(GetHurtAnim(),0);
+                yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+                priority = 0;
+                yield return null;
+            }
+
         }
     }
 
     public virtual IEnumerator Stun(float seconds){
-        IncreasePriority(6);
-        yield return new WaitForSeconds(seconds);
-        priority = 0;
+        if(IncreasePriority(6)){    
+            yield return new WaitForSeconds(seconds);
+            priority = 0;
+        }
     }
 
     virtual protected void Patrol(){}
@@ -73,7 +80,8 @@ public abstract class IEnemy : MonoBehaviour
 
     protected virtual IEnumerator Die(){
         IncreasePriority(7);
-        yield return new WaitForSeconds(0.1f);
+        animator.CrossFade(GetDeathAnim(),0);
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
         Destroy(gameObject);
     }
 
@@ -85,8 +93,10 @@ public abstract class IEnemy : MonoBehaviour
         priority = 0;
     }
 
-    protected void IncreasePriority(int priority){
-        this.priority = Mathf.Max(this.priority,priority);
+    protected bool IncreasePriority(int priority){
+        if(this.priority > priority){return false;}
+        this.priority = priority;
+        return true;
     }
     
 }
