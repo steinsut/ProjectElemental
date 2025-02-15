@@ -21,16 +21,11 @@ public class MeleeEnemy : IEnemy
         {
             StartCoroutine(Attack());
         }
-        LayerMask mask = ~LayerMask.GetMask("Enemy");
-        RaycastHit2D raycast = Physics2D.Raycast(transform.position + (Vector3) feetOffset, -transform.right, 0.5f, mask);
-        RaycastHit2D floorRaycast = Physics2D.Raycast(transform.position + (Vector3) feetOffset, Vector2.down, 0.1f, mask);
-        //Debug.Log(floorRaycast.collider == null);
-        //if(raycast.collider != null && raycast.collider.gameObject.tag != "Player" && floorRaycast.collider != null){
-         //   rigidBody.linearVelocityY = jumpAmount;
-        //}
-        
-        Vector2 directionX = new Vector2(Direction.x, 0);
-        Move(directionX.normalized);
+        else{
+            
+            Vector2 directionX = new Vector2(Direction.x, 0);
+            Move(directionX.normalized);
+        }
         
     }
 
@@ -38,6 +33,7 @@ public class MeleeEnemy : IEnemy
     IEnumerator Attack()
     {
         priority = 3;
+        rigidBody.linearVelocity = Vector2.zero;
         Debug.Log("Attack player.");
         //Swing animation
         yield return new WaitForSeconds(0.3f);
@@ -95,7 +91,6 @@ public class MeleeEnemy : IEnemy
     }
 
     void OnTriggerEnter2D(Collider2D col){
-        Debug.Log(priority);
         if(priority >= 2){
             rigidBody.AddForce(Vector2.up * jumpAmount);
         }
