@@ -19,12 +19,13 @@ public abstract class IEnemy : MonoBehaviour
     protected abstract int GetHurtAnim();
 
     void Awake(){
-        mask = ~LayerMask.GetMask("Enemy", "EnemyProjectile" , "Rune", "Player");
+        mask = ~LayerMask.GetMask("Enemy", "EnemyProjectile" , "Rune", "Player", "Windblower");
     }
     protected virtual void Update()
     {
         if(priority < 4){
             if(FindPlayer()){
+                Debug.Log("player found");
                 return;
             }
             if(priority == 3){//Lost track of the player
@@ -39,9 +40,8 @@ public abstract class IEnemy : MonoBehaviour
     }
 
     bool FindPlayer(){
-        LayerMask mask = ~LayerMask.GetMask("Enemy", "EnemyProjectile" , "Rune");
-        RaycastHit2D raycast = Physics2D.Raycast(transform.position + (Vector3) headOffset, (player.transform.position - transform.position).normalized, 100f, mask);
-
+        LayerMask mask = ~LayerMask.GetMask("Enemy", "EnemyProjectile" , "Rune", "Windblower");
+        RaycastHit2D raycast = Physics2D.Raycast(transform.position + (Vector3) headOffset, (player.transform.position - transform.position + (Vector3) headOffset).normalized, 100f, mask);
         if(raycast.collider != null && raycast.collider.gameObject.CompareTag("Player")){
             Vector2 Direction = player.transform.position - transform.position;
             if(Vector2.Dot(Direction, transform.right) > 0){
