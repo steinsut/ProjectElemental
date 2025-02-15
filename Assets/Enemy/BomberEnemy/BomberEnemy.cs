@@ -12,8 +12,12 @@ public class BomberEnemy : IEnemy
     public float patrolRange;
     Vector2 patrolTarget;
 
+    
+    protected override int GetDeathAnim(){return 0;}
+    protected override int GetHurtAnim(){return 0;}
+
     protected override void EnemyAction(Vector2 Direction){
-        IncreasePriority(3);
+        if(!IncreasePriority(3))return;
         patrolTarget = Vector2.zero;
         if (Mathf.Abs(Direction.x) < 0.3f)
         {
@@ -30,24 +34,26 @@ public class BomberEnemy : IEnemy
 
     IEnumerator Shoot()
     {
-        IncreasePriority(4);
-        rigidBody.linearVelocity = Vector2.zero;
-        yield return new WaitForSeconds(0.5f);
-        for (int i = -2; i <= 2; i++)
-        {
-            GameObject bomb = ProjectilePooling.SingletonInstance.GetBomb();
-            if (bomb != null)
+        if(IncreasePriority(4)){
+            rigidBody.linearVelocity = Vector2.zero;
+            yield return new WaitForSeconds(0.5f);
+            for (int i = -2; i <= 2; i++)
             {
-                bomb.transform.position = transform.position;
-                float angle = 30f * i;
-                Vector2 forceDirection = Quaternion.Euler(0, 0, angle) * Vector2.up;
-                bomb.GetComponent<BombScript>().initialForce = forceDirection;
-                bomb.transform.rotation = Quaternion.identity;
-                bomb.SetActive(true);
+                GameObject bomb = ProjectilePooling.SingletonInstance.GetBomb();
+                if (bomb != null)
+                {
+                    bomb.transform.position = transform.position;
+                    float angle = 30f * i;
+                    Vector2 forceDirection = Quaternion.Euler(0, 0, angle) * Vector2.up;
+                    bomb.GetComponent<BombScript>().initialForce = forceDirection;
+                    bomb.transform.rotation = Quaternion.identity;
+                    bomb.SetActive(true);
+                }
             }
+            yield return new WaitForSeconds(1f);
+            priority = 0;
         }
-        yield return new WaitForSeconds(1f);
-        priority = 0;
+        
         
     }
 

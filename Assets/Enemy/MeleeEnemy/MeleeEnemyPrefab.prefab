@@ -108,11 +108,11 @@ MonoBehaviour:
   player: {fileID: 0}
   headOffset: {x: 0, y: 0.2}
   rigidBody: {fileID: 1204699791767306646}
+  animator: {fileID: 4094712905212435425}
   speed: 1
   feetOffset: {x: 0, y: -0.1}
   jumpAmount: 200
   patrolRange: 3
-  animator: {fileID: 4094712905212435425}
 --- !u!50 &1204699791767306646
 Rigidbody2D:
   serializedVersion: 5
@@ -135,7 +135,7 @@ Rigidbody2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 7424
+    m_Bits: 13568
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -202,7 +202,7 @@ CircleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 7168
+    m_Bits: 15360
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -220,8 +220,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.33307743, y: -0.15424883}
-  m_Radius: 0.045262396
+  m_Offset: {x: -0.23243004, y: -0.12663886}
+  m_Radius: 0.013004899
 --- !u!95 &4094712905212435425
 Animator:
   serializedVersion: 7

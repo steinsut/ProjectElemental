@@ -11,23 +11,28 @@ public class MeleeEnemy : IEnemy
     public float jumpAmount;
 
     public float patrolRange;
-    Vector2 patrolTarget;
 
-    public Animator animator;
+    bool airborne = false;
+    Vector2 patrolTarget;
     int currentAttack = 0;
-    float attackResetTimer = 0.3f;
+    float attackResetTimer = 0.5f;
     private float currentAttackTime = 0f;
     static int IdleAnim = Animator.StringToHash("MeleeIdle");
     static int WalkAnim = Animator.StringToHash("MeleeWalk");
     static int RunAnim = Animator.StringToHash("MeleeRun");
+    static int JumpAnim = Animator.StringToHash("MeleeJump");
     static int HurtAnim = Animator.StringToHash("MeleeHurt");
     static int Attack1Anim = Animator.StringToHash("MeleeAttack");
     static int Attack2Anim = Animator.StringToHash("MeleeAttack2");
     static int Attack3Anim = Animator.StringToHash("MeleeAttack3");
     static int DeathAnim = Animator.StringToHash("MeleeDeath");
 
+
+
+    protected override int GetDeathAnim(){return DeathAnim;}
+    protected override int GetHurtAnim(){return HurtAnim;}
     protected override void EnemyAction(Vector2 Direction){
-        IncreasePriority(3);
+        if(!IncreasePriority(3))return;
         patrolTarget = Vector2.zero;
         if (Direction.magnitude < 1.5f)
         {
@@ -54,24 +59,27 @@ public class MeleeEnemy : IEnemy
 
     IEnumerator Attack()
     {
-        IncreasePriority(4);
-        rigidBody.linearVelocity = Vector2.zero;
-        switch (currentAttack){
-            case 0:
-                animator.CrossFade(Attack1Anim,0);
-                break;
-            case 1:
-                animator.CrossFade(Attack2Anim,0);
-                break;
-            case 2:
-                animator.CrossFade(Attack3Anim,0);
-                break;
+        if(IncreasePriority(4)){
+            rigidBody.linearVelocity = Vector2.zero;
+            currentAttackTime = 0f;
+            switch (currentAttack){
+                case 0:
+                    animator.CrossFade(Attack1Anim,0);
+                    break;
+                case 1:
+                    animator.CrossFade(Attack2Anim,0);
+                    break;
+                case 2:
+                    animator.CrossFade(Attack3Anim,0);
+                    break;
 
+            }
+            yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+            currentAttack = (currentAttack + 1) % 3;
+            currentAttackTime = 0f;
+            priority = 0;
         }
-        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
-        currentAttack = (currentAttack + 1) % 3;
-        currentAttackTime = 0f;
-        priority = 0;
+        
     }
 
     protected override void Patrol()
@@ -112,6 +120,8 @@ public class MeleeEnemy : IEnemy
         if(Mathf.Abs(rigidBody.linearVelocityX) < Mathf.Abs(directionX.x * speed))
             rigidBody.AddForceX(directionX.x * speed);
 
+        if(airborne){return;}
+
         if(towardsPlayer && animator.GetCurrentAnimatorStateInfo(0).shortNameHash != RunAnim){
             animator.CrossFade(RunAnim,0);
         }else if(!towardsPlayer && animator.GetCurrentAnimatorStateInfo(0).shortNameHash != WalkAnim){
@@ -131,8 +141,17 @@ public class MeleeEnemy : IEnemy
     }
 
     void OnTriggerEnter2D(Collider2D col){
-        if(priority >= 2){
+        StartCoroutine(JumpCoroutine());
+        
+    }
+
+    IEnumerator JumpCoroutine(){
+        if(priority == 3 && !airborne){
+            airborne = true;
             rigidBody.AddForce(Vector2.up * jumpAmount);
+            animator.CrossFade(JumpAnim,0);
+            yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+            airborne = false;
         }
     }
 
