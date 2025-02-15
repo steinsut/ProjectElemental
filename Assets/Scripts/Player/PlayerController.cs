@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     private Quaternion _initialRotation;
     
     [SerializeField]
-    private int _health = 5;
+    private int _health = 3;
 
     [SerializeField]
     private float _moveSpeed = 1.0f;
@@ -141,6 +141,28 @@ public class PlayerController : MonoBehaviour
     {
         get => _element;
         set => _element = value;
+    }
+    public void SetElement(ElementType element){
+        ElementType oldElement = this.Element;
+        if(oldElement == ElementType.DIRT && element != ElementType.DIRT){
+            LoseHealth();
+            LoseHealth();
+        }else if(oldElement != ElementType.DIRT && element == ElementType.DIRT){
+            GainHealth();
+            GainHealth();
+        }
+        switch (element){
+            case ElementType.DIRT:
+                break;
+            case ElementType.WATER:
+                break;
+            case ElementType.FIRE:
+                break;
+            case ElementType.AIR:
+                break;
+        }
+        //Do element switching animations and set sprites here, if needed
+        this.Element = element;
     }
 
     private void Awake()

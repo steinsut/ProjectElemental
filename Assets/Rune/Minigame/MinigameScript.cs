@@ -105,7 +105,7 @@ public class MinigameScript : MonoBehaviour
         }
         currentHit++;
         if(currentHit >= targetAmount){
-            player.GetComponent<PlayerController>().Element = targetElement;
+            player.GetComponent<PlayerController>().SetElement(targetElement);
             RestoreGameState();
         }
     }
