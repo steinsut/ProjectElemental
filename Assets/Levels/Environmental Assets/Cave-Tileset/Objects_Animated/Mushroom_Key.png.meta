@@ -409,7 +409,19 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Mushroom_Key_0: 1052187765491133595
+      Mushroom_Key_1: -3954940031950688193
+      Mushroom_Key_10: 1465600851664563051
+      Mushroom_Key_11: 4757679689132107872
+      Mushroom_Key_2: -8069579863916446443
+      Mushroom_Key_3: -1836875440712573681
+      Mushroom_Key_4: 123031121781250532
+      Mushroom_Key_5: -7981900141831912539
+      Mushroom_Key_6: 7318974482902841697
+      Mushroom_Key_7: -5399618117719775484
+      Mushroom_Key_8: -8494031539797171791
+      Mushroom_Key_9: -5856857258724309365
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

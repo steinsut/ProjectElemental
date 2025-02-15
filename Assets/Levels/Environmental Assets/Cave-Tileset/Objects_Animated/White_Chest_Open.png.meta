@@ -309,7 +309,15 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      White_Chest_Open_0: -2549459372484653262
+      White_Chest_Open_1: 508654185594264554
+      White_Chest_Open_2: -6108071433062067345
+      White_Chest_Open_3: 3456886712544586595
+      White_Chest_Open_4: 8577581332632452967
+      White_Chest_Open_5: -5275374472681877526
+      White_Chest_Open_6: -8934130721286287160
+      White_Chest_Open_7: -6692206271064841443
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

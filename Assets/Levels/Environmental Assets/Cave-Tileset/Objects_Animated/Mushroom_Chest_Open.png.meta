@@ -309,7 +309,15 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Mushroom_Chest_Open_0: 4995275026023715569
+      Mushroom_Chest_Open_1: 5020885444725531044
+      Mushroom_Chest_Open_2: -9088990576042411587
+      Mushroom_Chest_Open_3: -2345571704941042728
+      Mushroom_Chest_Open_4: -2009576831100587811
+      Mushroom_Chest_Open_5: 7662038540939936755
+      Mushroom_Chest_Open_6: 5248366174149809288
+      Mushroom_Chest_Open_7: -5673545348477399382
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
