@@ -459,7 +459,21 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Frostspike_0: 2625538413763073783
+      Frostspike_1: -3170509231084796611
+      Frostspike_10: -7325929515836756653
+      Frostspike_11: 2749544669927104997
+      Frostspike_12: -5038247882736666412
+      Frostspike_13: 8875608309629048839
+      Frostspike_2: -5503267316126110619
+      Frostspike_3: 7679391291497262764
+      Frostspike_4: 2923071432987185943
+      Frostspike_5: -3245979447508312603
+      Frostspike_6: 5174880401413857617
+      Frostspike_7: -6991356306803172816
+      Frostspike_8: -4082308966782989235
+      Frostspike_9: 8342537990582994242
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

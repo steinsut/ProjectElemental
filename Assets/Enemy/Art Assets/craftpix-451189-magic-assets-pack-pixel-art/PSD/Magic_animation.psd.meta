@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Magic_animation_0: 1951336198604868047
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

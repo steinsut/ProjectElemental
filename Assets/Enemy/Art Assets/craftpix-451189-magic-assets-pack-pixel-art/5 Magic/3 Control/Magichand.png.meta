@@ -259,7 +259,13 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Magichand_0: 2969876302417666732
+      Magichand_1: 8275596683218204995
+      Magichand_2: 3323425693402663346
+      Magichand_3: -1690770509862333430
+      Magichand_4: 2605459360575722530
+      Magichand_5: 7195200481972687044
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

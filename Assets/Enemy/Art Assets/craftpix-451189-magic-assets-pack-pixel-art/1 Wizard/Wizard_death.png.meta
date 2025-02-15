@@ -52,7 +52,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -120,10 +120,10 @@ TextureImporter:
         serializedVersion: 2
         x: 4
         y: 0
-        width: 24
-        height: 40
+        width: 43
+        height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -142,10 +142,10 @@ TextureImporter:
         serializedVersion: 2
         x: 53
         y: 0
-        width: 23
-        height: 40
+        width: 43
+        height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -164,10 +164,10 @@ TextureImporter:
         serializedVersion: 2
         x: 101
         y: 0
-        width: 27
-        height: 36
+        width: 43
+        height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -186,10 +186,10 @@ TextureImporter:
         serializedVersion: 2
         x: 149
         y: 0
-        width: 38
-        height: 27
+        width: 43
+        height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -208,10 +208,10 @@ TextureImporter:
         serializedVersion: 2
         x: 194
         y: 0
-        width: 44
-        height: 14
+        width: 43
+        height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -228,12 +228,12 @@ TextureImporter:
       name: Wizard_death_5
       rect:
         serializedVersion: 2
-        x: 241
+        x: 242
         y: 0
-        width: 45
-        height: 11
+        width: 43
+        height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -250,7 +250,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: fb6e3f4eac1c3904a844eed0e6acd644
     internalID: 0
     vertices: []
     indices: 
@@ -259,7 +259,13 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Wizard_death_0: 4899803718331302776
+      Wizard_death_1: 6978911102520954603
+      Wizard_death_2: 585889560380875715
+      Wizard_death_3: -2929804671270944394
+      Wizard_death_4: -5415785837629607687
+      Wizard_death_5: 4750962689468795414
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

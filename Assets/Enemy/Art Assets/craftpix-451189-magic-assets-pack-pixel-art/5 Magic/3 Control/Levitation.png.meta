@@ -209,7 +209,11 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Levitation_0: -8137884348497906727
+      Levitation_1: 7274234777008038500
+      Levitation_2: 3420695107273249293
+      Levitation_3: -1370208822261806584
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

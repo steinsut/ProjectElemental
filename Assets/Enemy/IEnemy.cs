@@ -25,7 +25,6 @@ public abstract class IEnemy : MonoBehaviour
     {
         if(priority < 4){
             if(FindPlayer()){
-                Debug.Log("player found");
                 return;
             }
             if(priority == 3){//Lost track of the player

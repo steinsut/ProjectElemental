@@ -384,7 +384,18 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Paralysis_0: 395672018297170279
+      Paralysis_1: 5138634030618405074
+      Paralysis_10: 5790244296736538252
+      Paralysis_2: 134377131780342419
+      Paralysis_3: -7178640938880127637
+      Paralysis_4: 3854161561554525426
+      Paralysis_5: 7205114823454382965
+      Paralysis_6: -5560683478366691687
+      Paralysis_7: -4455905950691265802
+      Paralysis_8: 1238603372208080353
+      Paralysis_9: -5070359119895236721
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
