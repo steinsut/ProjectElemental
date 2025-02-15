@@ -129,7 +129,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 762489156848650441, guid: d09e69b18c313d84ca4a071d73bf82db, type: 3}
       propertyPath: runeType
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 762489156848650441, guid: d09e69b18c313d84ca4a071d73bf82db, type: 3}
       propertyPath: totalAmount
@@ -868,7 +868,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 2.4
+  orthographic size: 3.6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

@@ -28,6 +28,7 @@ public class RuneScript : MonoBehaviour
                 break;
             case ElementType.WATER:
                 targetColor = Color.blue;
+                animations.GetComponent<Animator>().SetTrigger("WaterAnimations");
                 break;
             case ElementType.AIR:
                 targetColor = Color.gray;
