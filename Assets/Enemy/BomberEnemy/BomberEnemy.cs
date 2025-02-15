@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Numerics;
 using UnityEngine;
+using Quaternion = UnityEngine.Quaternion;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 
@@ -17,7 +18,7 @@ public class BomberEnemy : IEnemy
         patrolTarget = Vector2.zero;
         if (Direction.x < 0.3f)
         {
-            StartCoroutine(Attack());
+            StartCoroutine(Shoot());
         }
         else{
             
@@ -28,13 +29,26 @@ public class BomberEnemy : IEnemy
     }
 
 
-    IEnumerator Attack()
+    IEnumerator Shoot()
     {
         priority = 3;
         rigidBody.linearVelocity = Vector2.zero;
-        Debug.Log("Attack player.");
-        yield return new WaitForSeconds(1f);
+        for (int i = -2; i <= 2; i++)
+        {
+            GameObject bomb = ProjectilePooling.SingletonInstance.GetBomb();
+            if (bomb != null)
+            {
+                bomb.transform.position = transform.position;
+                float angle = 30f * i;
+                Vector2 forceDirection = Quaternion.Euler(0, 0, angle) * Vector2.up;
+                bomb.GetComponent<BombScript>().initialForce = forceDirection;
+                bomb.transform.rotation = Quaternion.identity;
+                bomb.SetActive(true);
+            }
+        }
+        yield return new WaitForSeconds(3f);
         priority = 0;
+        
     }
 
     protected override void Patrol()

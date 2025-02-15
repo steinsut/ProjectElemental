@@ -8,7 +8,6 @@ using Vector3 = UnityEngine.Vector3;
 
 public class RangedEnemy : IEnemy
 {
-    public GameObject projectilePrefab;
     public GameObject weaponPrefab;
     
     protected override void EnemyAction(Vector2 Direction){

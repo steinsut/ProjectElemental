@@ -759,7 +759,33 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Lightning-bolt_0: -3475142825580610831
+      Lightning-bolt_1: -4430060266147063419
+      Lightning-bolt_10: -1570692315825102032
+      Lightning-bolt_11: -2796792979283456824
+      Lightning-bolt_12: -8883391533981278109
+      Lightning-bolt_13: 376780369626323276
+      Lightning-bolt_14: 9007072136796999572
+      Lightning-bolt_15: 425437471763129991
+      Lightning-bolt_16: -8612784309858579949
+      Lightning-bolt_17: -1629639106703471960
+      Lightning-bolt_18: 8659320372042664986
+      Lightning-bolt_19: -7889539985091635783
+      Lightning-bolt_2: -6120511944319148375
+      Lightning-bolt_20: 2157693832644692305
+      Lightning-bolt_21: -7764873279510228072
+      Lightning-bolt_22: 2397440537002581932
+      Lightning-bolt_23: -6661266540739612150
+      Lightning-bolt_24: 3286887814352249656
+      Lightning-bolt_25: -8413518868115259733
+      Lightning-bolt_3: 7392201637894831213
+      Lightning-bolt_4: -4096363743782408168
+      Lightning-bolt_5: -2416979867250715430
+      Lightning-bolt_6: 8719278419603866474
+      Lightning-bolt_7: -3275986279729396712
+      Lightning-bolt_8: -4248983782699280140
+      Lightning-bolt_9: 8614614720661223305
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
