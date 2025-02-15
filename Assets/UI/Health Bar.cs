@@ -9,6 +9,11 @@ public class HealthBar : MonoBehaviour
     [SerializeField]
     private AnimationClip HeartLose, HeartGain;
 
+    [SerializeField]
+    private AudioClip HeartLoseAudio, HeartGainAudio;
+
+    private AudioSource AudioPlayer;
+
     private int heartCount = 3;
 
     public void addHeart()
@@ -27,6 +32,8 @@ public class HealthBar : MonoBehaviour
             default:
                 break;
         }
+
+        AudioPlayer.PlayOneShot(HeartGainAudio);
 
         heartCount += 1;
         if (heartCount > 3)
@@ -52,6 +59,8 @@ public class HealthBar : MonoBehaviour
                 break;
         }
 
+        AudioPlayer.PlayOneShot(HeartLoseAudio);
+
         heartCount -= 1;
         if (heartCount < 0)
         {
@@ -62,7 +71,7 @@ public class HealthBar : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        AudioPlayer = this.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
