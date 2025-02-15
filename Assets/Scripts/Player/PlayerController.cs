@@ -1,3 +1,4 @@
+using GsKit.Extensions;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.ShaderGraph.Internal;
@@ -93,6 +94,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float _windforce = 1.0f;
 
+    [Header("Water Variant Details")]
+    [SerializeField]
+    private float _waterbubbleRadius = 1.0f;
+
+    [SerializeField]
+    private float _waterbubbleStunDuration = 1.0f;
+
+    [SerializeField]
+    private float _waterbubbleCooldown = 1.0f;
+
     private bool _airborne = false;
     private bool _jumpQueued = false;
     private bool _hasDoubleJump = false;
@@ -108,6 +119,7 @@ public class PlayerController : MonoBehaviour
     private Coroutine _currentAttackCoroutine;
 
     private bool _fireballOnCooldown = false;
+    private bool _waterbubbleOnCooldown = false;
 
     private bool _stuckOnWall = false;
 
@@ -444,6 +456,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private IEnumerator WaitWaterbubbleCooldown()
+    {
+        yield return new WaitForSeconds(_waterbubbleCooldown);
+        _waterbubbleOnCooldown = false;
+    }
+
     public void DoAttack()
     {
         switch(_element)
@@ -472,6 +490,24 @@ public class PlayerController : MonoBehaviour
                 _windblower.Blowing = true;
                 break;
             case ElementType.WATER:
+                if (_waterbubbleOnCooldown) break;
+
+                Collider2D[] hits = Physics2D.OverlapCircleAll(
+                    transform.position,
+                    _waterbubbleRadius,
+                    _enemyMask
+                    );
+
+                foreach (Collider2D hit in hits)
+                {
+                    StartCoroutine(hit.GetComponent<IEnemy>().Stun(_waterbubbleStunDuration));
+                }
+                if (_currentAttackCoroutine != null)
+                {
+                    StopCoroutine(_currentAttackCoroutine);
+                }
+                _waterbubbleOnCooldown = true;
+                _currentAttackCoroutine = StartCoroutine(WaitWaterbubbleCooldown());
                 break;
         }
     }
