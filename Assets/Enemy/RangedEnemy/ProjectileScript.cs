@@ -5,13 +5,21 @@ public class ProjectileScript : MonoBehaviour
     public Vector2 direction;
     public float projectTileSpeed;
 
+    private float lifetime = 10f;
+
     void Update()
     {
         transform.position += (Vector3)direction * projectTileSpeed * Time.deltaTime;
-        if (Mathf.Abs(transform.position.x) > 20f  || Mathf.Abs(transform.position.y) > 20f)
+        lifetime -= Time.deltaTime;
+        if (lifetime <= 0)
         {
             gameObject.SetActive(false);
         }
+    }
+
+    private void OnEnable()
+    {
+        lifetime = 10f;
     }
 
     public void SetDirection(Vector2 direction){
