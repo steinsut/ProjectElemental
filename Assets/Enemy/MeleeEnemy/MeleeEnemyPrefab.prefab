@@ -105,6 +105,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 3
+  priority: 0
   player: {fileID: 0}
   headOffset: {x: 0, y: 0.2}
   rigidBody: {fileID: 1204699791767306646}
@@ -174,7 +175,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.0031237304, y: -0.009371221}
+  m_Offset: {x: -0.000025808811, y: -0.0021426976}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -184,7 +185,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.2877882, y: 0.34401536}
+  m_Size: {x: 0.2760849, y: 0.3295583}
   m_EdgeRadius: 0
 --- !u!58 &5611521435949873271
 CircleCollider2D:

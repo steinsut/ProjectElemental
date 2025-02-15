@@ -77,7 +77,8 @@ public class MeleeEnemy : IEnemy
             yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
             currentAttack = (currentAttack + 1) % 3;
             currentAttackTime = 0f;
-            priority = 0;
+            if(priority == 4)
+                priority = 0;
         }
         
     }
@@ -117,9 +118,7 @@ public class MeleeEnemy : IEnemy
         if(Vector2.Dot(directionX, transform.right) > 0){
                 transform.Rotate(new Vector3(0,180,0));
         }
-        if(Mathf.Abs(rigidBody.linearVelocityX) < Mathf.Abs(directionX.x * speed))
-            rigidBody.AddForceX(directionX.x * speed);
-
+        rigidBody.linearVelocityX = towardsPlayer? directionX.x * speed * 2 : directionX.x * speed;
         if(airborne){return;}
 
         if(towardsPlayer && animator.GetCurrentAnimatorStateInfo(0).shortNameHash != RunAnim){
@@ -131,13 +130,15 @@ public class MeleeEnemy : IEnemy
     }
 
     IEnumerator ChangePatrolDirection(Vector2 target){
-        IncreasePriority(1);
-        rigidBody.linearVelocityX = 0;
-        animator.CrossFade(IdleAnim,0);
-        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
-        patrolTarget = target;
-        priority = 0;
-        yield return null;
+        if(IncreasePriority(1)){
+            rigidBody.linearVelocityX = 0;
+            animator.CrossFade(IdleAnim,0);
+            yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+            patrolTarget = target;
+            if(priority == 1)
+                priority = 0;
+            yield return null;
+        }
     }
 
     void OnTriggerEnter2D(Collider2D col){

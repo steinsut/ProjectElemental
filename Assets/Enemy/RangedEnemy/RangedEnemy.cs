@@ -8,7 +8,6 @@ using Vector3 = UnityEngine.Vector3;
 
 public class RangedEnemy : IEnemy
 {
-    public GameObject weaponPrefab;
     
     protected override void EnemyAction(Vector2 Direction){
         StartCoroutine(Shoot(Direction));
@@ -21,8 +20,8 @@ public class RangedEnemy : IEnemy
         if(IncreasePriority(4)){
             GameObject projectile = ProjectilePooling.SingletonInstance.GetProjectile();
             if(projectile != null){
-                projectile.transform.position = weaponPrefab.transform.position;
-                projectile.transform.rotation = Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.right, (player.transform.position - weaponPrefab.transform.position).normalized));
+                projectile.transform.position = transform.position;
+                projectile.transform.rotation = Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.right, (player.transform.position - transform.position).normalized));
                 projectile.SetActive(true);            
             }
             

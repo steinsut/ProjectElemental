@@ -5,6 +5,8 @@ using UnityEngine;
 public abstract class IEnemy : MonoBehaviour
 {
     public int health;
+
+    [SerializeField]
     protected int priority = 0;
     public GameObject player;
     public Vector2 headOffset;
@@ -60,7 +62,8 @@ public abstract class IEnemy : MonoBehaviour
             }else{
                 animator.CrossFade(GetHurtAnim(),0);
                 yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
-                priority = 0;
+                if(priority == 5)
+                    priority = 0;
                 yield return null;
             }
 
@@ -70,7 +73,8 @@ public abstract class IEnemy : MonoBehaviour
     public virtual IEnumerator Stun(float seconds){
         if(IncreasePriority(6)){    
             yield return new WaitForSeconds(seconds);
-            priority = 0;
+            if(priority == 6)
+                priority = 0;
         }
     }
 
@@ -80,8 +84,10 @@ public abstract class IEnemy : MonoBehaviour
 
     protected virtual IEnumerator Die(){
         IncreasePriority(7);
+        rigidBody.linearVelocity = Vector3.zero;
         animator.CrossFade(GetDeathAnim(),0);
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+        yield return new WaitForSeconds(0.2f);
         Destroy(gameObject);
     }
 
@@ -90,7 +96,8 @@ public abstract class IEnemy : MonoBehaviour
         rigidBody.AddForce(force, ForceMode2D.Force);
     }
     public void StopPush(){
-        priority = 0;
+        if(priority == 2)
+            priority = 0;
     }
 
     protected bool IncreasePriority(int priority){
