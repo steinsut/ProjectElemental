@@ -47,4 +47,9 @@ public class CursorController : MonoBehaviour
             _lineRenderer.material.SetFloat(materialDirectionId, pos1.y - pos0.y > 0 ? 1 : -1);
         }
     }
+
+    public void SetTrackedTransform(Transform t)
+    {
+        _followTransform = t;
+    }
 }

@@ -1,6 +1,7 @@
 using GsKit.Extensions;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
@@ -16,6 +17,9 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private SpriteRenderer _spriteRenderer;
+
+    [SerializeField] 
+    private CursorController _cursor;
 
     [SerializeField]
     private Quaternion _initialRotation;
@@ -61,12 +65,27 @@ public class PlayerController : MonoBehaviour
 
     [Header("Dirt Variant Details")]
     [SerializeField]
+    private AnimatorController _dirtAnimator;
+
+    [SerializeField]
     private float _dirtMoveSpeed = 1.0f;
 
     [SerializeField]
     private PlayerDirtAttack[] _dirtAttacks;
 
     [Header("Fire Variant Details")]
+    [SerializeField]
+    private AnimatorController _fireAnimator;
+
+    [SerializeField]
+    private SpriteRenderer _backArm;
+
+    [SerializeField]
+    private SpriteRenderer _frontArm;
+
+    [SerializeField]
+    private Transform _backArmAnchor;
+
     [SerializeField]
     private PlayerFireball _fireballPrefab;
 
@@ -87,6 +106,9 @@ public class PlayerController : MonoBehaviour
 
     [Header("Air Variant Details")]
     [SerializeField]
+    private AnimatorController _airAnimator;
+
+    [SerializeField]
     private float _doubleJumpSpeed = 1.0f;
 
     [SerializeField]
@@ -98,7 +120,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float _windforce = 1.0f;
 
+    [SerializeField]
+    private float _floatSpeed = 1.0f;
+
+    [SerializeField]
+    private float _floatHeight = 1.0f;
+
     [Header("Water Variant Details")]
+    [SerializeField]
+    private AnimatorController _waterAnimator;
+
     [SerializeField]
     private float _waterbubbleRadius = 1.0f;
 
@@ -111,6 +142,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float _invulnerabilityTime = 1.0f;
     private float _invulnerabilityCounter = 0f;
+
+    private Vector3 _mousePos;
 
     private bool _airborne = false;
     private bool _jumpQueued = false;
@@ -130,6 +163,7 @@ public class PlayerController : MonoBehaviour
     private bool _fireballOnCooldown = false;
     private bool _waterbubbleOnCooldown = false;
 
+    private float _floatTime = 0;
     private bool _stuckOnWall = false;
 
     public bool Controllable
@@ -144,26 +178,47 @@ public class PlayerController : MonoBehaviour
         set => _element = value;
     }
     public void SetElement(ElementType element){
-        ElementType oldElement = this.Element;
-        if(oldElement == ElementType.DIRT && element != ElementType.DIRT){
+        if(_element == ElementType.DIRT && element != ElementType.DIRT){
             LoseHealth();
             LoseHealth();
-        }else if(oldElement != ElementType.DIRT && element == ElementType.DIRT){
+        }else if(_element != ElementType.DIRT && element == ElementType.DIRT){
             GainHealth();
             GainHealth();
         }
+
+        if(_element == ElementType.FIRE)
+        {
+            _backArm.enabled = false;
+            _frontArm.enabled = false;
+        }
+        _spriteRenderer.transform.position = Vector3.forward;
+
         switch (element){
             case ElementType.DIRT:
+                _cursor.SetTrackedTransform(transform);
+                _animator.StopPlayback();
+                _animator.runtimeAnimatorController = _dirtAnimator;
                 break;
             case ElementType.WATER:
+                _cursor.SetTrackedTransform(transform);
+                _animator.StopPlayback();
+                _animator.runtimeAnimatorController = _waterAnimator;
                 break;
             case ElementType.FIRE:
+                _cursor.SetTrackedTransform(_projectileAnchor);
+                _animator.StopPlayback();
+                _animator.runtimeAnimatorController = _fireAnimator;
+                _backArm.enabled = true;
+                _frontArm.enabled = true;
                 break;
             case ElementType.AIR:
+                _cursor.SetTrackedTransform(transform);
+                _animator.StopPlayback();
+                _animator.runtimeAnimatorController = _airAnimator;
                 break;
         }
         //Do element switching animations and set sprites here, if needed
-        this.Element = element;
+        _element = element;
     }
 
     private void Awake()
@@ -183,16 +238,14 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.V))
+        {
+            SetElement(ElementType.AIR);
+        }
+
         if(_canBeMoved)
         {
             float vel = Input.GetAxis("Horizontal");
-            if (vel < 0)
-            {
-                _spriteRenderer.flipX = true;
-            }
-            else if (vel > 0) {
-                _spriteRenderer.flipX = false;
-            }
             RaycastHit2D hit = Physics2D.Raycast(
                 _collider.bounds.center + new Vector3(_collider.bounds.extents.x * Mathf.Sign(vel), 0, 0),
                 transform.right * Mathf.Sign(vel),
@@ -218,26 +271,46 @@ public class PlayerController : MonoBehaviour
                     {
                         _rb2d.linearVelocityX = vel *
                             (_element == ElementType.DIRT ? _dirtMoveSpeed : _moveSpeed);
-                        if(vel != 0 && !_airborne)
-                        {
-                            _animator.Play("Walk");
-                        }
-                        else {
-                            _animator.Play("Idle");
-                        }
+                    }
+                    if (vel < 0)
+                    {
+                        _animator.Play(_airborne ? "Idle" : "Walk");
+                        _spriteRenderer.transform.localScale = new Vector3(-1, 1, 1);
+                    }
+                    else if (vel > 0)
+                    {
+                        _animator.Play(_airborne ? "Idle" : "Walk");
+                        _spriteRenderer.transform.localScale = new Vector3(1, 1, 1);
+                    }
+                    else
+                    {
+                        _animator.Play("Idle");
                     }
                 }
                 else
                 {
+                    float scaleSign = 1;
                     if(transform.right.y == 0)
                     {
                         _rb2d.linearVelocityY = 0;
                         _rb2d.linearVelocityX =  vel * _moveSpeed;
+
                     }
                     else
                     {
+                        vel = Input.GetAxis("Vertical");
                         _rb2d.linearVelocityX = 0;
-                        _rb2d.linearVelocityY = Input.GetAxis("Vertical") * _moveSpeed;
+                        _rb2d.linearVelocityY = vel * _moveSpeed;
+                        scaleSign = Mathf.Sign(transform.right.y);
+                    }
+                    if (vel != 0)
+                    {
+                        _animator.Play(_airborne ? "Idle" : "Walk");
+                        _spriteRenderer.transform.localScale = new Vector3(Mathf.Sign(vel) * scaleSign, 1, 1);
+                    }
+                    else
+                    {
+                        _animator.Play("Idle");
                     }
                 }
             }
@@ -256,6 +329,7 @@ public class PlayerController : MonoBehaviour
         {
             DoAttack();
             Vector3 mousePos = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
+            mousePos.z = 0;
             Vector2 direction = (mousePos - transform.position).normalized;
             _mouseAnchor.up = direction;
         }
@@ -310,6 +384,7 @@ public class PlayerController : MonoBehaviour
                     transform.rotation = _initialRotation;
                     _rb2d.linearVelocityY = _doubleJumpSpeed;
                     _stuckOnWall = false;
+                    _spriteRenderer.transform.localScale = Vector3.one;
                 }
             }
         }
@@ -320,6 +395,7 @@ public class PlayerController : MonoBehaviour
                 _rb2d.linearVelocityY = _doubleJumpSpeed;
                 transform.rotation = _initialRotation;
                 _stuckOnWall = false;
+                _spriteRenderer.transform.localScale = Vector3.one;
             }
 
             RaycastHit2D jumpQueueHit = Physics2D.Raycast(
@@ -384,6 +460,7 @@ public class PlayerController : MonoBehaviour
         }
         if(_windblower.Blowing) {
             Vector3 mousePos = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
+            mousePos.z = 0;
             Vector2 direction = (mousePos - transform.position).normalized;
             _mouseAnchor.up = direction;
         }
@@ -392,6 +469,28 @@ public class PlayerController : MonoBehaviour
             if(_invulnerabilityCounter >= _invulnerabilityTime){
                 _damaged = false;
                 _invulnerabilityCounter = 0f;
+            }
+        }
+        
+        if(_element == ElementType.FIRE)
+        {
+            Vector3 mousePos = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
+            mousePos.z = 0;
+            Vector2 direction = (_backArmAnchor.position - mousePos).normalized;
+            _backArmAnchor.up = direction;
+        }
+
+        if (_element == ElementType.AIR)
+        {
+            if(!_airborne)
+            {
+                _floatTime += Time.deltaTime;
+                _spriteRenderer.transform.localPosition = 
+                    new Vector3(0, Mathf.Sin(_floatTime * _floatSpeed + Mathf.PI * 1.5f) * _floatHeight + _floatHeight, 1);
+            }
+            else {
+                _floatTime = 0;
+                _spriteRenderer.transform.localPosition = Vector3.forward;
             }
         }
     }
@@ -416,7 +515,7 @@ public class PlayerController : MonoBehaviour
                 attack.MaxLeapDistance,
                 _enemyMask
                 );
-        _spriteRenderer.flipX = sign > 0 ? false : true;
+        _spriteRenderer.transform.localScale = sign > 0 ? Vector3.one : new Vector3(-1 , 1, 1);
 
         if (hits.Length > 0)
         {
@@ -466,9 +565,13 @@ public class PlayerController : MonoBehaviour
 
         float rand = Random.Range(0, 1f) ;
 
+        Vector3 mousePos = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        mousePos.z = 0;
+
         PlayerFireball fireball = Instantiate<PlayerFireball>(_fireballPrefab, _projectileAnchor.position, Quaternion.identity);
         fireball.damage = _fireballDamage;
-        fireball.transform.right = _mouseAnchor.up;
+        fireball.transform.right = (mousePos - _projectileAnchor.transform.position).normalized;
+        fireball.transform.localScale = Vector3.one;
         fireball.velocity = (_fireballSpeed + rand * _fireballSpeedDeviation);
         fireball.velocityDeviation = rand;
 
@@ -572,11 +675,17 @@ public class PlayerController : MonoBehaviour
         if(_health <= 0){
             yield return DeathCoroutine();
         }else{
-            Color originalColor = GetComponent<SpriteRenderer>().color;
-            GetComponent<SpriteRenderer>().color = Color.red;
+            Color originalColor = _spriteRenderer.color;
+            Color originalColorFront = _frontArm.color;
+            Color originalColorBack = _backArm.color;
+            _spriteRenderer.color = Color.red;
+            _frontArm.color = Color.red;
+            _backArm.color = Color.red;
             yield return new WaitForSeconds(0.3f);
             
-            GetComponent<SpriteRenderer>().color = originalColor;
+            _spriteRenderer.color = originalColor;
+            _frontArm.color = originalColorFront;
+            _backArm.color = originalColorBack;
             ToggleAttackControls();
             ToggleMovementControls();
             yield return null;
@@ -586,7 +695,8 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator DeathCoroutine(){
         Debug.Log("YOU DIED");
-        //Implement death procedure here
+        ToggleAttackControls();
+        ToggleMovementControls();
         yield return null;
     }
 }
