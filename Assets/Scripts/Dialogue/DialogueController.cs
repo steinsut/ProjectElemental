@@ -155,4 +155,9 @@ public class DialogueController : MonoBehaviour
             _rightImage.sprite = currentEntry.RightPortrait;
         }
     }
+
+    public void SetDialoguePosition(Transform box)
+    {
+        transform.position = box.position;
+    }
 }
