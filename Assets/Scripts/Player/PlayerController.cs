@@ -26,7 +26,10 @@ public class PlayerController : MonoBehaviour
     
     [SerializeField]
     private Animator _transformAnimator;
-    
+
+    [SerializeField]
+    private AnimatorController _noneAnimator;
+
     [SerializeField]
     private int _health = 3;
 
@@ -233,6 +236,11 @@ public class PlayerController : MonoBehaviour
                 _animator.StopPlayback();
                 _animator.runtimeAnimatorController = _airAnimator;
                 _transformAnimator.SetTrigger("AirTransform");
+                break;
+            default:
+                _cursor.SetTrackedTransform(transform);
+                _animator.StopPlayback();
+                _animator.runtimeAnimatorController = _noneAnimator;
                 break;
         }
         //Do element switching animations and set sprites here, if needed
