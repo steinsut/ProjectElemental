@@ -10,6 +10,11 @@ public class MinigameTargetScript : MonoBehaviour
     bool active = false;
     MinigameScript manager;
     public float totalDuration;
+    public Sprite AirSprite;
+    public Sprite FireSprite;
+    public Sprite WaterSprite;
+    public Sprite DirtSprite;
+    private Image image;
     public void ActivateTarget(MinigameScript manager){
         this.manager = manager;
         active = true;
@@ -22,19 +27,24 @@ public class MinigameTargetScript : MonoBehaviour
     }
 
     public void SetElement(ElementType type){
-        Color targetColor = Color.clear;
+        image = GetComponent<Image>();
+        Color targetColor = Color.white;
         switch (type){
             case ElementType.DIRT:
-                targetColor = new Color(0.59f, 0.29f, 0.0f); // brown
+                image.sprite = DirtSprite;
+                // targetColor = new Color(0.59f, 0.29f, 0.0f); // brown
                 break;
             case ElementType.FIRE:
-                targetColor = Color.red;
+                image.sprite = FireSprite;
+                //targetColor = Color.red;
                 break;
             case ElementType.WATER:
-                targetColor = Color.blue;
+                image.sprite = WaterSprite;
+                //targetColor = Color.blue;
                 break;
             case ElementType.AIR:
-                targetColor = Color.gray;
+                image.sprite = AirSprite; 
+                //targetColor = Color.gray;
                 break;
             case ElementType.WOOD:
                 break;

@@ -146,3 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   totalDuration: 0.2
+  AirSprite: {fileID: -4380870861940804617, guid: 1683bd4168dce6b48897afdb7070d86f, type: 3}
+  FireSprite: {fileID: 2182104939008684181, guid: 5b570b245762cb748927dfa8201ea1b3, type: 3}
+  WaterSprite: {fileID: 4496080281824229475, guid: f1f7ed5156eef234a9e24df7707eb1f9, type: 3}
+  DirtSprite: {fileID: 553656824733586858, guid: bbd30a9313d327c4b9b9e466276a3c6a, type: 3}
