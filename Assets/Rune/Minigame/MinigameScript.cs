@@ -4,6 +4,7 @@ using UnityEngine;
 using Image = UnityEngine.UI.Image;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 
 public class MinigameScript : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class MinigameScript : MonoBehaviour
     [SerializeField]
     float targetSpawnRate = 0.05f;
     private ElementType targetElement;
+    public TextMeshProUGUI catchText;
     PlayerController player;
     GameObject currRune;
     public GameObject minigameTarget;
@@ -40,7 +42,8 @@ public class MinigameScript : MonoBehaviour
         InitializeElements();
         panelImage = GetComponentInChildren<Image>();
         panelImage.raycastTarget = true;
-        panelImage.color = new Color(panelImage.color.r,panelImage.color.g,panelImage.color.b,0.95f);
+        panelImage.color = new Color(panelImage.color.r,panelImage.color.g,panelImage.color.b,0.38f);
+        catchText.alpha = 1;
         Time.timeScale = 0.2f;
         StartCoroutine(SpawnTargets( totalTargets));
     }
@@ -68,6 +71,7 @@ public class MinigameScript : MonoBehaviour
             
         }
         if(active){
+            yield return new WaitForSeconds(3* targetSpawnRate);
             RestoreGameState();
         }
         yield return null;
@@ -122,6 +126,7 @@ public class MinigameScript : MonoBehaviour
             StartCoroutine(currRune.GetComponent<RuneScript>().CollectRune());
         panelImage.raycastTarget = false;
         panelImage.color = new Color(panelImage.color.r,panelImage.color.g,panelImage.color.b,0f);
+        catchText.alpha = 0f;
         Time.timeScale = 1;
     }
 }
