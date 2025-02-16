@@ -124,6 +124,9 @@ public class PlayerController : MonoBehaviour
     private GameObject _endGameScreen;
 
     [SerializeField]
+    private GameObject _winScreen;
+
+    [SerializeField]
     private float _windforce = 1.0f;
 
     [SerializeField]
@@ -750,5 +753,10 @@ public class PlayerController : MonoBehaviour
     IEnumerator DeathCoroutine(){
         _endGameScreen.SetActive(true);
         yield return null;
+    }
+
+    
+    void Win(){
+        _winScreen.SetActive(true);
     }
 }
