@@ -9,6 +9,10 @@ public abstract class IEnemy : MonoBehaviour
     [SerializeField]
     protected int priority = 0;
     public GameObject player;
+    private SpriteRenderer spriteRenderer;
+
+    [SerializeField]
+    protected GameObject stunBubble;
     public Vector2 headOffset;
     [SerializeField]
     protected Rigidbody2D rigidBody;
@@ -20,6 +24,7 @@ public abstract class IEnemy : MonoBehaviour
 
     void Awake(){
         mask = ~LayerMask.GetMask("Enemy", "EnemyProjectile" , "Rune", "Player", "Windblower");
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
     protected virtual void Update()
     {
@@ -71,9 +76,13 @@ public abstract class IEnemy : MonoBehaviour
 
     public virtual IEnumerator Stun(float seconds){
         if(IncreasePriority(6)){    
+            stunBubble.SetActive(true);
+            spriteRenderer.enabled = false;
             yield return new WaitForSeconds(seconds);
             if(priority == 6)
                 priority = 0;
+            stunBubble.SetActive(false);
+            spriteRenderer.enabled = true;
         }
     }
 
@@ -83,6 +92,8 @@ public abstract class IEnemy : MonoBehaviour
 
     protected virtual IEnumerator Die(){
         IncreasePriority(7);
+        stunBubble.SetActive(false);
+        spriteRenderer.enabled = true;
         rigidBody.linearVelocity = Vector3.zero;
         animator.CrossFade(GetDeathAnim(),0);
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
