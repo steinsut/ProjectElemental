@@ -185,6 +185,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private GameObject flavorTarget, flavor;
 
+    [Header("UI Integration")]
+    [SerializeField]
+    private HealthBar HealthDisplay;
+
     public ElementType Element
     {
         get => _element;
@@ -695,14 +699,17 @@ public class PlayerController : MonoBehaviour
 
     public void SetHealth(int health){
         _health = health;
+        HealthDisplay.setHeartCount(health);
     }
     public void GainHealth(){
         _health++;
+        HealthDisplay.addHeart();
         //Do gain health UI work here
     }
     public void LoseHealth(){
         _damaged = true;
         _health--;
+        HealthDisplay.removeHeart();
         //Do lose health UI work here
     }
 
