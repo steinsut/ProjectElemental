@@ -169,12 +169,6 @@ public class PlayerController : MonoBehaviour
     private float _floatTime = 0;
     private bool _stuckOnWall = false;
 
-    public bool Controllable
-    {
-        get => _canBeMoved;
-        set => _canBeMoved = value;
-    }
-
     public ElementType Element
     {
         get => _element;
@@ -242,11 +236,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.V))
-        {
-            SetElement(ElementType.AIR);
-        }
-
         if(_canBeMoved)
         {
             float vel = Input.GetAxis("Horizontal");
@@ -338,7 +327,7 @@ public class PlayerController : MonoBehaviour
             _mouseAnchor.up = direction;
         }
 
-        else if(!_canAttack && Input.GetButtonUp("Fire1"))
+        else if(!_canAttack && !Input.GetButton("Fire1"))
         {
             _windblower.Blowing = false;
         }
@@ -509,6 +498,16 @@ public class PlayerController : MonoBehaviour
         _canAttack = !_canAttack;
     }
 
+    public void SetMovementControlsEnabled(bool enabled)
+    {
+        _canBeMoved = enabled;
+    }
+
+    public void SetAttackControlsEnabled(bool enabled)
+    {
+        _canAttack = enabled;
+    }
+
     private IEnumerator DoDirtAttack(PlayerDirtAttack attack)
     {
         Vector2 mousePos = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
@@ -572,9 +571,12 @@ public class PlayerController : MonoBehaviour
         Vector3 mousePos = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = 0;
 
+        Vector3 anchorPos = _projectileAnchor.transform.position;
+        anchorPos.z = 0;
+
         PlayerFireball fireball = Instantiate<PlayerFireball>(_fireballPrefab, _projectileAnchor.position, Quaternion.identity);
         fireball.damage = _fireballDamage;
-        fireball.transform.right = (mousePos - _projectileAnchor.transform.position).normalized;
+        fireball.transform.right = (mousePos - anchorPos).normalized;
         fireball.transform.localScale = Vector3.one;
         fireball.velocity = (_fireballSpeed + rand * _fireballSpeedDeviation);
         fireball.velocityDeviation = rand;

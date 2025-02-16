@@ -17,7 +17,7 @@ MonoBehaviour:
   _typewritingDelay: 0.1
   _typewritingSoundId: snd_default_text
   _shakeStrength: 1
-  _shakePreDelay: 0.025
+  _shakePreDelay: 1
   _shakePostDelay: 0.025
   _shakePer: all
   _waveStrength: 1

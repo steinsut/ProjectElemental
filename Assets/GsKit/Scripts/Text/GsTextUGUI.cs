@@ -13,21 +13,22 @@ using GsKit.Settings;
 
 namespace GsKit.Text
 {
-    [RequireComponent(typeof(TextMeshPro))]
-    public class GsText : MonoBehaviour
+    [RequireComponent(typeof(TextMeshProUGUI))]
+    public class GsTextUGUI : MonoBehaviour
     {
         private ResourceService _resourceService;
         private SettingsService _settingsService;
         private PoolService _poolService;
         private TextSettings _textSettings;
         private TextEffectSettings _effectSettings;
-        private TextMeshPro _tmp;
+        private TextMeshProUGUI _tmp;
         private string _realText;
         private string _gsSanitizedText;
         private List<GsTextPart> _textParts = new();
         private float _time = 0;
         private bool _isTypewriting = false;
         private float _typewritingDelay = 0;
+        private float _realTypewritingDelay = 0;
         private Queue<(int, Dictionary<string, string>)> _typewriterAttributes = new();
         private AbstractResource _twAudio = null;
         private Pool.Object _twAudioPlayerPoolObj;
@@ -49,6 +50,8 @@ namespace GsKit.Text
 
         private static Dictionary<string, Regex> s_tagRegexes = new();
 
+        public int VisibleCharacters => _tmp.maxVisibleCharacters;
+
         public static void AddTagHandler(string tagToHandle, Type type)
         {
             if (typeof(IGsTextEffect).IsAssignableFrom(type)) throw new ArgumentException($"{type} does not implement IGsTextEffect.");
@@ -65,7 +68,7 @@ namespace GsKit.Text
 
         private void Awake()
         {
-            _tmp = GetComponent<TextMeshPro>();
+            _tmp = GetComponent<TextMeshProUGUI>();
             _resourceService = ServiceLocator.Instance.GetService<ResourceService>();
             _settingsService = ServiceLocator.Instance.GetService<SettingsService>();
             _poolService = ServiceLocator.Instance.GetService<PoolService>();
@@ -369,6 +372,7 @@ namespace GsKit.Text
         {
             (int, Dictionary<string, string>) tuple = _typewriterAttributes.Dequeue();
             _typewritingDelay = float.Parse(tuple.Item2.GetValueOrDefault("delay", "0.1"));
+            _realTypewritingDelay = _typewritingDelay;
 
             string id = tuple.Item2.GetValueOrDefault("sound", _twAudio.ResourceID);
             if (id.Equals("null")) _twAudio = null;
@@ -399,8 +403,9 @@ namespace GsKit.Text
         public void SetText(string text)
         {
             Reset();
+            _gsSanitizedText = "";
             _realText = text;
-
+            _tmp.text = text;
             _tmp.ForceMeshUpdate();
             ParseText(_tmp.GetParsedText(), false);
             ParseText(_tmp.text, true);
@@ -411,7 +416,7 @@ namespace GsKit.Text
                 part.SetTMPIndex(currentIndex);
                 currentIndex += part.Text.Length;
             }
-            _tmp.text = _gsSanitizedText; ;
+            _tmp.text = _gsSanitizedText;
             TypewritingChecks();
             _tmp.ForceMeshUpdate();
         }
@@ -422,7 +427,7 @@ namespace GsKit.Text
             _typewriterAttributes.Clear();
             _isTypewriting = false;
             _typewritingDelay = 0;
-            if (!string.IsNullOrEmpty(_effectSettings.TypewritingSoundId))  
+            if (!string.IsNullOrEmpty(_effectSettings.TypewritingSoundId))
             {
                 if (_effectSettings.TypewritingSoundId == "null") _twAudio = null;
                 else
@@ -437,6 +442,16 @@ namespace GsKit.Text
             }
             else _twAudio = null;
             _time = 0;
+        }
+
+        public void OverrideTypewriteDelay(float delay)
+        {
+            _typewritingDelay = delay;
+        }
+
+        public void RestoreTypewriteDelay()
+        {
+            _typewritingDelay = _realTypewritingDelay;
         }
 
         private void OnDestroy()

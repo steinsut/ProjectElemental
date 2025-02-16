@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Dialogue : ScriptableObject
+[CreateAssetMenu(fileName = "Dialogue", menuName = "ProjectElemental/Dialogue/Dialogue")]
+public class DialogueResource : ScriptableObject
 {
     [SerializeField]
-    private List<DialogueEntry> _entries;
+    private List<DialogueEntryResource> _entries;
 
-    public IReadOnlyList<DialogueEntry> Entries => _entries;
+    public IReadOnlyList<DialogueEntryResource> Entries => _entries;
 }
