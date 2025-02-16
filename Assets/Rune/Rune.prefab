@@ -263,7 +263,7 @@ MonoBehaviour:
   targetColor: {r: 0, g: 0, b: 0, a: 0}
   minigamePanel: {fileID: 399648557671900421, guid: ff3da2142700ce545a6e9c09ac0a0de2, type: 3}
   animations: {fileID: 1568139946493403046}
-  airSprite: {fileID: 0}
+  airSprite: {fileID: -4000673900596559518, guid: fed7198bac0128c42896df174739cf69, type: 3}
   waterSprite: {fileID: 5477935084490843340, guid: cf11e387c439c204991f5113faaeeec8, type: 3}
   fireSprite: {fileID: -6206576359774645891, guid: 5c481457df861ef4f8878ab25f958df0, type: 3}
   dirtSprite: {fileID: 6820761914102494064, guid: 840176b4c5b84734781239f748c6f9dd, type: 3}
