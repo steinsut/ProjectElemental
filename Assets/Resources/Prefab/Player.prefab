@@ -220,7 +220,7 @@ GameObject:
   - component: {fileID: 400389900759974169}
   - component: {fileID: 2401564207646628534}
   - component: {fileID: 5199995668936090519}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Windblower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -687,6 +687,7 @@ MonoBehaviour:
   _doubleJumpSpeed: 4.3
   _dashSpeed: 10
   _windblower: {fileID: 5199995668936090519}
+  _endGameScreen: {fileID: 0}
   _windforce: 20
   _floatSpeed: 1
   _floatHeight: 0.05
