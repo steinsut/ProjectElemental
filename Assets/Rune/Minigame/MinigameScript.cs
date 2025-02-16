@@ -22,6 +22,7 @@ public class MinigameScript : MonoBehaviour
     public GameObject minigameTarget;
     public List<GameObject> targetPool;
     public void StartMinigame(int targetAmount, int totalAmount, ElementType target, GameObject rune, PlayerController player){
+        if(active){return;}
         active = true;
         Cursor.visible = true;
         this.totalTargets = totalAmount;
@@ -119,13 +120,13 @@ public class MinigameScript : MonoBehaviour
     }
 
     void RestoreGameState(){
-        active = false;
         Cursor.visible = false;
         for(int i = 0; i < targetPool.Count; i++){
             targetPool[i].SetActive(false);
         }
         if(currRune != null)
             StartCoroutine(currRune.GetComponent<RuneScript>().CollectRune());
+        active = false;
         panelImage.raycastTarget = false;
         panelImage.color = new Color(panelImage.color.r,panelImage.color.g,panelImage.color.b,0f);
         catchText.alpha = 0f;

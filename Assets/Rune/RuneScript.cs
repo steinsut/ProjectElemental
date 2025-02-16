@@ -91,7 +91,6 @@ public class RuneScript : MonoBehaviour
     {
         if(active && Input.GetKeyDown(KeyCode.F)){
             minigamePanel.GetComponent<MinigameScript>().StartMinigame(targetAmount, totalAmount,runeType, gameObject, player.GetComponent<PlayerController>());
-            
         }
     }
 
@@ -109,10 +108,12 @@ public class RuneScript : MonoBehaviour
     }
 
     public IEnumerator CollectRune(){
+        active = false;
         animator.CrossFade(RunePickup, 0,0);
         animations.SetActive(false);
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
-        Destroy(gameObject);
+        if(isActiveAndEnabled)
+            Destroy(gameObject);
 
     }
 }
