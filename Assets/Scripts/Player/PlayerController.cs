@@ -7,14 +7,15 @@ using UnityEngine;
 [RequireComponent (typeof(CapsuleCollider2D))]
 [RequireComponent (typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
-[RequireComponent(typeof(SpriteRenderer))]
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D _rb2d;
     private Collider2D _collider;
     private Animator _animator;
-    private SpriteRenderer _spriteRenderer;
     private Camera _mainCamera;
+
+    [SerializeField]
+    private SpriteRenderer _spriteRenderer;
 
     [SerializeField]
     private Quaternion _initialRotation;
@@ -140,7 +141,6 @@ public class PlayerController : MonoBehaviour
         _rb2d = GetComponent<Rigidbody2D>();
         _collider = GetComponent<CapsuleCollider2D>();
         _animator = GetComponent<Animator>();
-        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -188,6 +188,13 @@ public class PlayerController : MonoBehaviour
                     {
                         _rb2d.linearVelocityX = vel *
                             (_element == ElementType.DIRT ? _dirtMoveSpeed : _moveSpeed);
+                        if(vel != 0 && !_airborne)
+                        {
+                            _animator.Play("Walk");
+                        }
+                        else {
+                            _animator.Play("Idle");
+                        }
                     }
                 }
                 else
@@ -385,20 +392,8 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        float intervalPerFrame = -1;
-        if (attack.Frames != null && attack.Frames.Length > 0)
-        {
-            intervalPerFrame = attack.DamageDelay / attack.Frames.Length;
-            foreach(Sprite frame in attack.Frames)
-            {
-                _spriteRenderer.sprite = frame;
-                yield return new WaitForSeconds(intervalPerFrame);
-            }
-        }
-        else
-        {
-            yield return new WaitForSeconds(attack.DamageDelay);
-        }
+        _animator.Play(attack.StateName);
+        yield return new WaitForSeconds(attack.DamageDelay);
         float delta = 0;
         List<int> ids = new();
         while (delta < attack.DamageTime)
@@ -424,6 +419,7 @@ public class PlayerController : MonoBehaviour
         _canAttack = true;
         yield return new WaitForSeconds(attack.ExitTime);
         _canBeMoved = true;
+        _animator.Play("Idle");
     }
 
     private IEnumerator DoFireball()

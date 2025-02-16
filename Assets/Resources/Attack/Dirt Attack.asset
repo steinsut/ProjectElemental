@@ -20,4 +20,4 @@ MonoBehaviour:
   _damageTime: 0.1
   _exitDelay: 0.2
   _exitTime: 0.1
-  _frames: []
+  _stateName: DirtPunch
