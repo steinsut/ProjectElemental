@@ -348,7 +348,7 @@ public class PlayerController : MonoBehaviour
             _mouseAnchor.up = direction;
         }
 
-        else if(!_canAttack && !Input.GetButton("Fire1"))
+        else if(!_canAttack || !Input.GetButton("Fire1"))
         {
             _windblower.Blowing = false;
         }

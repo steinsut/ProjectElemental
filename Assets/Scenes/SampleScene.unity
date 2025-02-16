@@ -1107,6 +1107,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edda8d8ee735bac449d81650c911750c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _leftImage: {fileID: 0}
+  _rightImage: {fileID: 0}
   _player: {fileID: 2011039328}
   _dialogue: {fileID: 0}
   _enemies: []
@@ -1800,6 +1802,10 @@ PrefabInstance:
       propertyPath: _cursor
       value: 
       objectReference: {fileID: 1839737416}
+    - target: {fileID: 3302107188200243970, guid: 42cbf73a71c49d34f8b7e65b1f4528cd, type: 3}
+      propertyPath: _element
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 9074733092431338948, guid: 42cbf73a71c49d34f8b7e65b1f4528cd, type: 3}
       propertyPath: m_Name
       value: Player

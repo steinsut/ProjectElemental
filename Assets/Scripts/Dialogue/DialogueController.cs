@@ -9,17 +9,13 @@ public class DialogueController : MonoBehaviour
     private static DialogueController s_Instance = null;
 
     [SerializeField]
-    private Image _leftImage;
-    
-    [SerializeField]
-    private Image _rightImage;
-
-
-    [SerializeField]
     private PlayerController _player;
 
     [SerializeField]
     private DialogueResource _dialogue = null;
+
+    [SerializeField]
+    private Transform _box = null;
 
     [SerializeField]
     private IEnemy[] _enemies;
@@ -66,13 +62,9 @@ public class DialogueController : MonoBehaviour
         {
             _text.enabled = false;
             _textUGUI.enabled = false;
-            if (_leftImage != null)
+            if(_box != null)
             {
-                _leftImage.enabled = false;
-            }
-            if (_rightImage != null)
-            {
-                _rightImage.enabled = false;
+                _box.gameObject.SetActive(false);
             }
         }
         if (_playing)
@@ -112,14 +104,11 @@ public class DialogueController : MonoBehaviour
             }
             _textUGUI.enabled = true;
             _text.enabled = true;
-            if (_leftImage != null)
+            if(_box != null)
             {
-                _leftImage.enabled = true;
+                _box.gameObject.SetActive(true);
             }
-            if (_rightImage != null)
-            {
-                _rightImage.enabled = true;
-            }
+
             UpdateEntry();
 
             _playing = true;
@@ -146,18 +135,14 @@ public class DialogueController : MonoBehaviour
         DialogueEntryResource currentEntry = _dialogue.Entries[_currentEntry];
 
         _text.SetText(_dialogue.Entries[_currentEntry].Text);
-        if ( _leftImage != null)
-        {
-            _leftImage.sprite = currentEntry.LeftPortrait;
-        }
-        if (_rightImage != null)
-        {
-            _rightImage.sprite = currentEntry.RightPortrait;
-        }
     }
 
-    public void SetDialoguePosition(Transform box)
+    public void SetDialoguePosition(Transform location)
     {
-        transform.position = box.position;
+        transform.position = location.position;
+        if(_box != null)
+        {
+            _box.position = location.position;
+        }
     }
 }
