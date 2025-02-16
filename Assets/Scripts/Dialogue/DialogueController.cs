@@ -1,4 +1,5 @@
 using GsKit.Text;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,7 +19,7 @@ public class DialogueController : MonoBehaviour
     private Transform _box = null;
 
     [SerializeField]
-    private IEnemy[] _enemies;
+    private List<IEnemy> _enemies;
 
     private GsTextUGUI _text;
     private TextMeshProUGUI _textUGUI;
@@ -29,9 +30,19 @@ public class DialogueController : MonoBehaviour
     public static DialogueController Instance => s_Instance == null ? 
         new GameObject().AddComponent<DialogueController>() : s_Instance;
 
+    private void populateEnemies()
+    {
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Enemy"))
+        {
+            _enemies.Add(obj.GetComponent<IEnemy>());
+        }
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
     {
+        populateEnemies();
+
         if(s_Instance == null)
         {
             s_Instance = this;

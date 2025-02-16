@@ -36,7 +36,7 @@ public class CursorController : MonoBehaviour
         pos1.z = 1;
         _lineRenderer.SetPosition(0, pos0);
         _lineRenderer.SetPosition(1, pos1);
-        pos1.z = -1;
+        pos1.z = transform.position.z;
         transform.position = pos1;
         if(_lineRenderer.bounds.size.x > _lineRenderer.bounds.size.y)
         {

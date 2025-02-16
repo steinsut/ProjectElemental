@@ -730,6 +730,11 @@ public class PlayerController : MonoBehaviour
             if(_damaged){return;}
             if(other.gameObject.CompareTag("EnvironmentalHazard") && Element == ElementType.DIRT){return;}//ignore environmental hazards if dirt
             StartCoroutine(TakeDamageCoroutine());
+        } else if (other.gameObject.CompareTag("Death"))
+        {
+            StartCoroutine(DeathCoroutine());
+        } else if (other.gameObject.CompareTag("Win"))
+        {
         }
     }
 
