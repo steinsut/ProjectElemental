@@ -23,6 +23,7 @@ public class MinigameScript : MonoBehaviour
     public List<GameObject> targetPool;
     public void StartMinigame(int targetAmount, int totalAmount, ElementType target, GameObject rune, PlayerController player){
         active = true;
+        Cursor.visible = true;
         this.totalTargets = totalAmount;
         if(targetPool == null){
             targetPool = new List<GameObject>();
@@ -119,6 +120,7 @@ public class MinigameScript : MonoBehaviour
 
     void RestoreGameState(){
         active = false;
+        Cursor.visible = false;
         for(int i = 0; i < targetPool.Count; i++){
             targetPool[i].SetActive(false);
         }
