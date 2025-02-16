@@ -9,6 +9,8 @@ TagManager:
   - Minigame
   - Wall
   - EnvironmentalHazard
+  - Death
+  - Win
   layers:
   - Default
   - TransparentFX
