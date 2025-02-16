@@ -1,16 +1,10 @@
+using System.Collections.Generic;
 using UnityEngine;
 
-public class Dialogue : MonoBehaviour
+public class Dialogue : ScriptableObject
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [SerializeField]
+    private List<DialogueEntry> _entries;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public IReadOnlyList<DialogueEntry> Entries => _entries;
 }

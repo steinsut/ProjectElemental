@@ -663,7 +663,7 @@ MonoBehaviour:
   _feetMask:
     serializedVersion: 2
     m_Bits: 128
-  _element: 4
+  _element: 2
   _enemyMask:
     serializedVersion: 2
     m_Bits: 1024
@@ -705,7 +705,7 @@ Animator:
   m_GameObject: {fileID: 9074733092431338948}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 132644013e788404fadd4d8165d4a87f, type: 2}
+  m_Controller: {fileID: 9100000, guid: f898f6e9dba6aef46add7d02a8bf35b3, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

@@ -8,6 +8,9 @@ public class DialogueEntry : ScriptableObject
         Right 
     };
 
-    private string _dialogueText;
+    private string _text;
     private Side _portraitSide;
+
+    public string Text => _text;
+    public Side Portraitide => _portraitSide;
 }

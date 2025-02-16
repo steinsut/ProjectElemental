@@ -191,7 +191,7 @@ public class PlayerController : MonoBehaviour
             _backArm.enabled = false;
             _frontArm.enabled = false;
         }
-        _spriteRenderer.transform.position = Vector3.forward;
+        _spriteRenderer.transform.localPosition = Vector3.forward;
 
         switch (element){
             case ElementType.DIRT:
@@ -233,6 +233,7 @@ public class PlayerController : MonoBehaviour
     {
         _mainCamera = Camera.main;
         _initialRotation = transform.rotation;
+        SetElement(_element);
     }
 
     // Update is called once per frame
