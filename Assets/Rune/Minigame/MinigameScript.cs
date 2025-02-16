@@ -13,7 +13,7 @@ public class MinigameScript : MonoBehaviour
     private int currentHit;
     private int totalTargets;
     [SerializeField]
-    float targetSpawnRate = 0.1f;
+    float targetSpawnRate = 0.05f;
     private ElementType targetElement;
     PlayerController player;
     GameObject currRune;
