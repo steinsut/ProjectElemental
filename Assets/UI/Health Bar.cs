@@ -17,17 +17,6 @@ public class HealthBar : MonoBehaviour
     private int heartCount = 5;
 
     private int aimedHeart = 3;
-
-    public void incrementHeart()
-    {
-        aimedHeart += 1;
-    }
-
-    public void damage()
-    {
-        aimedHeart -= 1;
-    }
-
     public void setHeartCount(int hc)
     {
         aimedHeart = hc;
@@ -71,12 +60,13 @@ public class HealthBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("Aiming for: " + aimedHeart.ToString());
         if (heartCount > aimedHeart)
         {
             deltaSum += Time.deltaTime;
             if (deltaSum > timeBetweenUpdates)
             {
-                removeHeart();
+                animateDeletion();
                 deltaSum = 0;
             }
         } else if (heartCount < aimedHeart)
@@ -84,7 +74,7 @@ public class HealthBar : MonoBehaviour
             deltaSum += Time.deltaTime;
             if (deltaSum > timeBetweenUpdates / 2)
             {
-                addHeart();
+                animateAddition();
                 deltaSum = 0;
             }
         }
