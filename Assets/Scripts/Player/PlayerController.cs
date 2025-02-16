@@ -25,6 +25,9 @@ public class PlayerController : MonoBehaviour
     private Quaternion _initialRotation;
     
     [SerializeField]
+    private Animator _transformAnimator;
+    
+    [SerializeField]
     private int _health = 3;
 
     [SerializeField]
@@ -169,6 +172,19 @@ public class PlayerController : MonoBehaviour
     private float _floatTime = 0;
     private bool _stuckOnWall = false;
 
+    [Header("Flavor Settings")]
+    [SerializeField]
+    private AudioClip _audio_dash, _audio_jump, _audio_transform;
+
+    [SerializeField]
+    private AudioSource audioSource;
+
+    [SerializeField]
+    private AnimationClip _fanim_dash, _fanim_jump;
+
+    [SerializeField]
+    private GameObject flavorTarget, flavor;
+
     public ElementType Element
     {
         get => _element;
@@ -182,6 +198,8 @@ public class PlayerController : MonoBehaviour
             GainHealth();
             GainHealth();
         }
+        audioSource.clip = _audio_transform;
+        audioSource.Play();
 
         if(_element == ElementType.FIRE)
         {
@@ -200,11 +218,13 @@ public class PlayerController : MonoBehaviour
                 _cursor.SetTrackedTransform(transform);
                 _animator.StopPlayback();
                 _animator.runtimeAnimatorController = _waterAnimator;
+                _transformAnimator.SetTrigger("WaterTransform");
                 break;
             case ElementType.FIRE:
                 _cursor.SetTrackedTransform(_projectileAnchor);
                 _animator.StopPlayback();
                 _animator.runtimeAnimatorController = _fireAnimator;
+                _transformAnimator.SetTrigger("FireTransform");
                 _backArm.enabled = true;
                 _frontArm.enabled = true;
                 break;
@@ -212,6 +232,7 @@ public class PlayerController : MonoBehaviour
                 _cursor.SetTrackedTransform(transform);
                 _animator.StopPlayback();
                 _animator.runtimeAnimatorController = _airAnimator;
+                _transformAnimator.SetTrigger("AirTransform");
                 break;
         }
         //Do element switching animations and set sprites here, if needed
@@ -370,6 +391,10 @@ public class PlayerController : MonoBehaviour
             _dashedOnce = false;
             if(_canBeMoved && _element != ElementType.DIRT && (Input.GetButtonDown("Jump") || _jumpQueued))
             {
+                // FLAVOR
+                audioSource.resource = _audio_jump;
+                audioSource.Play();
+                // FLAVOR
                 _rb2d.linearVelocity = transform.up * _jumpSpeed;
                 _jumpQueued = false;
                 if(_stuckOnWall)
@@ -407,6 +432,13 @@ public class PlayerController : MonoBehaviour
             {
                 if (_canBeMoved && _hasDoubleJump && Input.GetButtonDown("Jump"))
                 {
+                    // double
+                    // FLAVOR
+                    audioSource.resource = _audio_jump;
+                    audioSource.Play();
+                    flavor.transform.position = flavorTarget.transform.position;
+                    flavor.GetComponent<Animator>().Play(_fanim_jump.name);
+                    // FLAVOR
                     _rb2d.linearVelocityY = _doubleJumpSpeed;
                     _hasDoubleJump = false;
                     _jumpQueued = false;
@@ -416,6 +448,13 @@ public class PlayerController : MonoBehaviour
                     Input.GetKeyDown(KeyCode.LeftShift) &&
                     Input.GetAxisRaw("Horizontal") != 0)
                 {
+                    // Dash
+                    // FLAVOR
+                    audioSource.resource = _audio_dash;
+                    audioSource.Play();
+                    flavor.transform.position = flavorTarget.transform.position;
+                    flavor.GetComponent<Animator>().Play(_fanim_dash.name);
+                    // FLAVOR
                     _dashing = true;
                     _dashedOnce = true;
                     _dashDelta = 0;
@@ -670,6 +709,7 @@ public class PlayerController : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other){
         if(other.gameObject.layer == LayerMask.NameToLayer("EnemyProjectile") || other.gameObject.CompareTag("EnvironmentalHazard")){
             if(_damaged){return;}
+            if(other.gameObject.CompareTag("EnvironmentalHazard") && Element == ElementType.DIRT){return;}//ignore environmental hazards if dirt
             StartCoroutine(TakeDamageCoroutine());
         }
     }

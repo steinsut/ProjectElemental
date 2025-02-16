@@ -21,6 +21,7 @@ public class RuneScript : MonoBehaviour
         switch (runeType){
             case ElementType.DIRT:
                 targetColor = new Color(0.59f, 0.29f, 0.0f); // brown
+                animations.GetComponent<Animator>().SetTrigger("DirtAnimations");
                 break;
             case ElementType.FIRE:
                 targetColor = Color.red;

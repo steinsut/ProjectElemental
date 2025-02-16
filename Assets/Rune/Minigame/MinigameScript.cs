@@ -12,6 +12,8 @@ public class MinigameScript : MonoBehaviour
     private int targetAmount;
     private int currentHit;
     private int totalTargets;
+    [SerializeField]
+    float targetSpawnRate = 0.05f;
     private ElementType targetElement;
     PlayerController player;
     GameObject currRune;
@@ -53,14 +55,15 @@ public class MinigameScript : MonoBehaviour
             if(active){
                 GameObject currTarget = targetPool[i];
                 if(currTarget != null){
+                    float padding = currTarget.GetComponent<RectTransform>().rect.height / 2;
                     currTarget.transform.position = transform.position;
                     currTarget.transform.SetParent(panelImage.gameObject.transform);
-                    Vector2 randomLocation = new Vector2(Random.Range(minX + 10,maxX - 10), Random.Range(minY + 10,maxY - 10));
+                    Vector2 randomLocation = new Vector2(Random.Range(minX + padding,maxX - padding), Random.Range(minY + padding,maxY - padding));
                     currTarget.GetComponent<RectTransform>().localPosition = randomLocation;
                     currTarget.SetActive(true);
                     currTarget.GetComponent<MinigameTargetScript>().ActivateTarget(this);
                 }
-                yield return new WaitForSeconds(0.2f);
+                yield return new WaitForSeconds(targetSpawnRate);
             }
             
         }
@@ -115,7 +118,8 @@ public class MinigameScript : MonoBehaviour
         for(int i = 0; i < targetPool.Count; i++){
             targetPool[i].SetActive(false);
         }
-        StartCoroutine(currRune.GetComponent<RuneScript>().CollectRune());
+        if(currRune != null)
+            StartCoroutine(currRune.GetComponent<RuneScript>().CollectRune());
         panelImage.raycastTarget = false;
         panelImage.color = new Color(panelImage.color.r,panelImage.color.g,panelImage.color.b,0f);
         Time.timeScale = 1;
