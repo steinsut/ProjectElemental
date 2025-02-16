@@ -34,7 +34,7 @@ public class MeleeEnemy : IEnemy
     protected override void EnemyAction(Vector2 Direction){
         if(!IncreasePriority(3))return;
         patrolTarget = Vector2.zero;
-        if (Direction.magnitude < 1.5f)
+        if (Direction.magnitude < 1f)
         {
             StartCoroutine(Attack());
         }

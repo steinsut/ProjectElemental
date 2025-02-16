@@ -1,10 +1,10 @@
-using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class HealthBar : MonoBehaviour
 {
     [SerializeField]
-    private GameObject H1,H2,H3;
+    private List<GameObject> hearts;
 
     [SerializeField]
     private AnimationClip HeartLose, HeartGain;
@@ -14,58 +14,39 @@ public class HealthBar : MonoBehaviour
 
     private AudioSource AudioPlayer;
 
-    private int heartCount = 3;
+    private int heartCount = 5;
+
+    private int aimedHeart = 3;
+
+    public void incrementHeart()
+    {
+        aimedHeart += 1;
+    }
+
+    public void damage()
+    {
+        aimedHeart -= 1;
+    }
+
+    public void setHeartCount(int hc)
+    {
+        aimedHeart = hc;
+        if (aimedHeart < 0)
+        {
+            aimedHeart = 0;
+        }
+    }
 
     public void addHeart()
     {
-        switch (heartCount)
-        {
-            case 0:
-                H3.GetComponent<Animator>().Play(HeartGain.name);
-                break;
-            case 1:
-                H2.GetComponent<Animator>().Play(HeartGain.name);
-                break;
-            case 2:
-                H1.GetComponent<Animator>().Play(HeartGain.name);
-                break;
-            default:
-                break;
-        }
-
+        hearts[heartCount++].GetComponent<Animator>().Play(HeartGain.name);
         AudioPlayer.PlayOneShot(HeartGainAudio);
-
-        heartCount += 1;
-        if (heartCount > 3)
-        {
-            heartCount = 3;
-        }
     }
 
     public void removeHeart()
     {
-        switch (heartCount)
-        {
-            case 1:
-                H3.GetComponent<Animator>().Play(HeartLose.name);
-                break;
-            case 2:
-                H2.GetComponent<Animator>().Play(HeartLose.name);
-                break;
-            case 3:
-                H1.GetComponent<Animator>().Play(HeartLose.name);
-                break;
-            default:
-                break;
-        }
-
+        hearts[--heartCount].GetComponent<Animator>().Play(HeartLose.name);
         AudioPlayer.PlayOneShot(HeartLoseAudio);
-
-        heartCount -= 1;
-        if (heartCount < 0)
-        {
-            heartCount = 0;
-        }
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -74,9 +55,28 @@ public class HealthBar : MonoBehaviour
         AudioPlayer = this.GetComponent<AudioSource>();
     }
 
+    private float deltaSum = 0;
+    private float timeBetweenUpdates = 0.2f;
+
     // Update is called once per frame
     void Update()
     {
-        
+        if (heartCount > aimedHeart)
+        {
+            deltaSum += Time.deltaTime;
+            if (deltaSum > timeBetweenUpdates)
+            {
+                removeHeart();
+                deltaSum = 0;
+            }
+        } else if (heartCount < aimedHeart)
+        {
+            deltaSum += Time.deltaTime;
+            if (deltaSum > timeBetweenUpdates / 2)
+            {
+                addHeart();
+                deltaSum = 0;
+            }
+        }
     }
 }
