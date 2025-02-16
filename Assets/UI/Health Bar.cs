@@ -37,16 +37,26 @@ public class HealthBar : MonoBehaviour
         }
     }
 
-    public void addHeart()
+    public void animateAddition()
     {
         hearts[heartCount++].GetComponent<Animator>().Play(HeartGain.name);
         AudioPlayer.PlayOneShot(HeartGainAudio);
     }
 
-    public void removeHeart()
+    public void animateDeletion()
     {
         hearts[--heartCount].GetComponent<Animator>().Play(HeartLose.name);
         AudioPlayer.PlayOneShot(HeartLoseAudio);
+    }
+
+    public void addHeart()
+    {
+        aimedHeart += 1;
+    }
+
+    public void removeHeart()
+    {
+        aimedHeart -= 1;
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
