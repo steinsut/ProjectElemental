@@ -1088,6 +1088,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7732236537993177279, guid: ff3da2142700ce545a6e9c09ac0a0de2, type: 3}
+      propertyPath: targetSpawnRate
+      value: 0.05
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1113,14 +1117,14 @@ PrefabInstance:
     - target: {fileID: -4456011694132215860, guid: ef5cc52ac52c3d0429d934edc0f4d09f, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1395134457}
     - target: {fileID: 247699596390843848, guid: ef5cc52ac52c3d0429d934edc0f4d09f, type: 3}
       propertyPath: m_Name
       value: RangedEnemyPrefab
       objectReference: {fileID: 0}
     - target: {fileID: 247699596390843848, guid: ef5cc52ac52c3d0429d934edc0f4d09f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7001224071575912117, guid: ef5cc52ac52c3d0429d934edc0f4d09f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1512,7 +1516,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5191022251090970881, guid: 5db7e9d38e92c274da8ee268748dccf1, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5835007677231199302, guid: 5db7e9d38e92c274da8ee268748dccf1, type: 3}
       propertyPath: player

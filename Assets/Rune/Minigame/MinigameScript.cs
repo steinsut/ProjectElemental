@@ -12,6 +12,8 @@ public class MinigameScript : MonoBehaviour
     private int targetAmount;
     private int currentHit;
     private int totalTargets;
+    [SerializeField]
+    float targetSpawnRate = 0.1f;
     private ElementType targetElement;
     PlayerController player;
     GameObject currRune;
@@ -55,12 +57,12 @@ public class MinigameScript : MonoBehaviour
                 if(currTarget != null){
                     currTarget.transform.position = transform.position;
                     currTarget.transform.SetParent(panelImage.gameObject.transform);
-                    Vector2 randomLocation = new Vector2(Random.Range(minX + 10,maxX - 10), Random.Range(minY + 10,maxY - 10));
+                    Vector2 randomLocation = new Vector2(Random.Range(minX + 50,maxX - 50), Random.Range(minY + 50,maxY - 50));
                     currTarget.GetComponent<RectTransform>().localPosition = randomLocation;
                     currTarget.SetActive(true);
                     currTarget.GetComponent<MinigameTargetScript>().ActivateTarget(this);
                 }
-                yield return new WaitForSeconds(0.2f);
+                yield return new WaitForSeconds(targetSpawnRate);
             }
             
         }

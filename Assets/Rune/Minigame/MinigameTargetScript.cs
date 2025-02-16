@@ -15,10 +15,9 @@ public class MinigameTargetScript : MonoBehaviour
         active = true;
         transform.DOScale(minScale,0);
         transform.DOScale(1, totalDuration).OnComplete(() => {
-            transform.DOScale(minScale,totalDuration).OnComplete(() => {
-                gameObject.SetActive(false);
-            });
-
+            //transform.DOScale(minScale,totalDuration).OnComplete(() => {
+             //   gameObject.SetActive(false);
+            //});
         });
     }
 

@@ -668,6 +668,7 @@ public class PlayerController : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other){
         if(other.gameObject.layer == LayerMask.NameToLayer("EnemyProjectile") || other.gameObject.CompareTag("EnvironmentalHazard")){
             if(_damaged){return;}
+            if(other.gameObject.CompareTag("EnvironmentalHazard") && Element == ElementType.DIRT)
             StartCoroutine(TakeDamageCoroutine());
         }
     }
