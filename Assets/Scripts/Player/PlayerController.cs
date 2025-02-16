@@ -118,6 +118,9 @@ public class PlayerController : MonoBehaviour
     private Windblower _windblower;
 
     [SerializeField]
+    private GameObject _endGameScreen;
+
+    [SerializeField]
     private float _windforce = 1.0f;
 
     [SerializeField]
@@ -695,9 +698,7 @@ public class PlayerController : MonoBehaviour
     }
 
     IEnumerator DeathCoroutine(){
-        Debug.Log("YOU DIED");
-        ToggleAttackControls();
-        ToggleMovementControls();
+        _endGameScreen.SetActive(true);
         yield return null;
     }
 }
