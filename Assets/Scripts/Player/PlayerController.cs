@@ -198,7 +198,6 @@ public class PlayerController : MonoBehaviour
         if(_element == ElementType.DIRT && element != ElementType.DIRT){
             while(_health > 3){
                 LoseHealth();
-                LoseHealth();
             }
         }else if(_element != ElementType.DIRT && element == ElementType.DIRT){
             GainHealth();
