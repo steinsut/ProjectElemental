@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      air element rune_0: -4000673900596559518
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
