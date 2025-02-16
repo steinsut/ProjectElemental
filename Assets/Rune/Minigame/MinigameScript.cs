@@ -118,7 +118,8 @@ public class MinigameScript : MonoBehaviour
         for(int i = 0; i < targetPool.Count; i++){
             targetPool[i].SetActive(false);
         }
-        StartCoroutine(currRune.GetComponent<RuneScript>().CollectRune());
+        if(currRune != null)
+            StartCoroutine(currRune.GetComponent<RuneScript>().CollectRune());
         panelImage.raycastTarget = false;
         panelImage.color = new Color(panelImage.color.r,panelImage.color.g,panelImage.color.b,0f);
         Time.timeScale = 1;
