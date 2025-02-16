@@ -19,6 +19,10 @@ public abstract class IEnemy : MonoBehaviour
     protected LayerMask mask;
     public Animator animator;
 
+
+    [SerializeField]
+    private AudioClip deathAudio;
+
     protected abstract int GetDeathAnim();
     protected abstract int GetHurtAnim();
 
@@ -95,6 +99,9 @@ public abstract class IEnemy : MonoBehaviour
         stunBubble.SetActive(false);
         spriteRenderer.enabled = true;
         rigidBody.linearVelocity = Vector3.zero;
+        gameObject.GetComponent<AudioSource>().resource = deathAudio;
+        gameObject.GetComponent<AudioSource>().Play();
+
         animator.CrossFade(GetDeathAnim(),0);
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
         yield return new WaitForSeconds(0.2f);

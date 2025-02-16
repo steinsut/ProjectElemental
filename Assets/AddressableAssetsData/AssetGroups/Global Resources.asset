@@ -45,20 +45,8 @@ MonoBehaviour:
     m_SerializedLabels:
     - default
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a34fcf7eff0915b4998deba9b77cf1e0
-    m_Address: Assets/Test/Audio/Cook.asset
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - default
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: bd037cadd7f40ce448f9dcebd10d3032
     m_Address: Assets/Test/Audio/Default Text Sound.asset
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - default
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: ed4ff98e3a104694cb7e66c0ade30402
-    m_Address: Assets/Test/Audio/C o o k (CutePiano bgm).mp3
     m_ReadOnly: 0
     m_SerializedLabels:
     - default

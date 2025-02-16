@@ -29,6 +29,7 @@ public class MeleeEnemy : IEnemy
 
 
 
+
     protected override int GetDeathAnim(){return DeathAnim;}
     protected override int GetHurtAnim(){return HurtAnim;}
     protected override void EnemyAction(Vector2 Direction){

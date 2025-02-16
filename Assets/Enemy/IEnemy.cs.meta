@@ -1,2 +1,16 @@
 fileFormatVersion: 2
 guid: 2e79c1d52cc09b84484f124af11d7c85
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - player: {instanceID: 0}
+  - stunBubble: {instanceID: 0}
+  - rigidBody: {instanceID: 0}
+  - animator: {instanceID: 0}
+  - deathAudio: {fileID: 8300000, guid: d46e4c944a87e974191941e22dbaabaf, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

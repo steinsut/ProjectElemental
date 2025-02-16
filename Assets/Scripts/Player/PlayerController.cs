@@ -1,8 +1,6 @@
 using GsKit.Extensions;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Animations;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 [RequireComponent (typeof(CapsuleCollider2D))]
@@ -28,7 +26,7 @@ public class PlayerController : MonoBehaviour
     private Animator _transformAnimator;
 
     [SerializeField]
-    private AnimatorController _noneAnimator;
+    private RuntimeAnimatorController _noneAnimator;
 
     [SerializeField]
     private int _health = 3;
@@ -71,7 +69,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Dirt Variant Details")]
     [SerializeField]
-    private AnimatorController _dirtAnimator;
+    private RuntimeAnimatorController _dirtAnimator;
 
     [SerializeField]
     private float _dirtMoveSpeed = 1.0f;
@@ -81,7 +79,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Fire Variant Details")]
     [SerializeField]
-    private AnimatorController _fireAnimator;
+    private RuntimeAnimatorController _fireAnimator;
 
     [SerializeField]
     private SpriteRenderer _backArm;
@@ -112,7 +110,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Air Variant Details")]
     [SerializeField]
-    private AnimatorController _airAnimator;
+    private RuntimeAnimatorController _airAnimator;
 
     [SerializeField]
     private float _doubleJumpSpeed = 1.0f;
@@ -140,7 +138,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Water Variant Details")]
     [SerializeField]
-    private AnimatorController _waterAnimator;
+    private RuntimeAnimatorController _waterAnimator;
 
     [SerializeField]
     private float _waterbubbleRadius = 1.0f;
@@ -735,6 +733,7 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(DeathCoroutine());
         } else if (other.gameObject.CompareTag("Win"))
         {
+            Win();
         }
     }
 
