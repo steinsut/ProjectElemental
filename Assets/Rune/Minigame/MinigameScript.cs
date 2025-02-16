@@ -55,9 +55,10 @@ public class MinigameScript : MonoBehaviour
             if(active){
                 GameObject currTarget = targetPool[i];
                 if(currTarget != null){
+                    float padding = currTarget.GetComponent<RectTransform>().rect.height / 2;
                     currTarget.transform.position = transform.position;
                     currTarget.transform.SetParent(panelImage.gameObject.transform);
-                    Vector2 randomLocation = new Vector2(Random.Range(minX + 50,maxX - 50), Random.Range(minY + 50,maxY - 50));
+                    Vector2 randomLocation = new Vector2(Random.Range(minX + padding,maxX - padding), Random.Range(minY + padding,maxY - padding));
                     currTarget.GetComponent<RectTransform>().localPosition = randomLocation;
                     currTarget.SetActive(true);
                     currTarget.GetComponent<MinigameTargetScript>().ActivateTarget(this);
