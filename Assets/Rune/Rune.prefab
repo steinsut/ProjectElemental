@@ -140,7 +140,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.81, y: 0.05, z: 0}
-  m_LocalScale: {x: 0.29997, y: 0.29997, z: 0.29997}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7085446321032699118}
@@ -190,7 +190,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 6820761914102494064, guid: 840176b4c5b84734781239f748c6f9dd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -235,17 +235,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.0031838417, y: 0.028656125}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.39, y: 0.59}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 2.5, y: 2.5}
+  m_Size: {x: 0.27746415, y: 0.54087746}
   m_EdgeRadius: 0
 --- !u!114 &762489156848650441
 MonoBehaviour:
@@ -263,6 +263,10 @@ MonoBehaviour:
   targetColor: {r: 0, g: 0, b: 0, a: 0}
   minigamePanel: {fileID: 399648557671900421, guid: ff3da2142700ce545a6e9c09ac0a0de2, type: 3}
   animations: {fileID: 1568139946493403046}
+  airSprite: {fileID: -4000673900596559518, guid: fed7198bac0128c42896df174739cf69, type: 3}
+  waterSprite: {fileID: 5477935084490843340, guid: cf11e387c439c204991f5113faaeeec8, type: 3}
+  fireSprite: {fileID: -6206576359774645891, guid: 5c481457df861ef4f8878ab25f958df0, type: 3}
+  dirtSprite: {fileID: 6820761914102494064, guid: 840176b4c5b84734781239f748c6f9dd, type: 3}
   targetAmount: 0
   totalAmount: 0
   animator: {fileID: 9207524219403668830}

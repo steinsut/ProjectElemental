@@ -4,6 +4,7 @@ using UnityEngine;
 using Image = UnityEngine.UI.Image;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 
 public class MinigameScript : MonoBehaviour
 {
@@ -15,12 +16,15 @@ public class MinigameScript : MonoBehaviour
     [SerializeField]
     float targetSpawnRate = 0.05f;
     private ElementType targetElement;
+    public TextMeshProUGUI catchText;
     PlayerController player;
     GameObject currRune;
     public GameObject minigameTarget;
     public List<GameObject> targetPool;
     public void StartMinigame(int targetAmount, int totalAmount, ElementType target, GameObject rune, PlayerController player){
+        if(active){return;}
         active = true;
+        Cursor.visible = true;
         this.totalTargets = totalAmount;
         if(targetPool == null){
             targetPool = new List<GameObject>();
@@ -40,7 +44,8 @@ public class MinigameScript : MonoBehaviour
         InitializeElements();
         panelImage = GetComponentInChildren<Image>();
         panelImage.raycastTarget = true;
-        panelImage.color = new Color(panelImage.color.r,panelImage.color.g,panelImage.color.b,0.95f);
+        panelImage.color = new Color(panelImage.color.r,panelImage.color.g,panelImage.color.b,0.38f);
+        catchText.alpha = 1;
         Time.timeScale = 0.2f;
         StartCoroutine(SpawnTargets( totalTargets));
     }
@@ -68,6 +73,7 @@ public class MinigameScript : MonoBehaviour
             
         }
         if(active){
+            yield return new WaitForSeconds(3* targetSpawnRate);
             RestoreGameState();
         }
         yield return null;
@@ -114,14 +120,16 @@ public class MinigameScript : MonoBehaviour
     }
 
     void RestoreGameState(){
-        active = false;
+        Cursor.visible = false;
         for(int i = 0; i < targetPool.Count; i++){
             targetPool[i].SetActive(false);
         }
         if(currRune != null)
             StartCoroutine(currRune.GetComponent<RuneScript>().CollectRune());
+        active = false;
         panelImage.raycastTarget = false;
         panelImage.color = new Color(panelImage.color.r,panelImage.color.g,panelImage.color.b,0f);
+        catchText.alpha = 0f;
         Time.timeScale = 1;
     }
 }

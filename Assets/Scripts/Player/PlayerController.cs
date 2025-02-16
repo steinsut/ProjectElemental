@@ -127,6 +127,9 @@ public class PlayerController : MonoBehaviour
     private GameObject _endGameScreen;
 
     [SerializeField]
+    private GameObject _winScreen;
+
+    [SerializeField]
     private float _windforce = 1.0f;
 
     [SerializeField]
@@ -188,6 +191,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private GameObject flavorTarget, flavor;
 
+    [Header("UI Integration")]
+    [SerializeField]
+    private HealthBar HealthDisplay;
+
     public ElementType Element
     {
         get => _element;
@@ -195,8 +202,9 @@ public class PlayerController : MonoBehaviour
     }
     public void SetElement(ElementType element){
         if(_element == ElementType.DIRT && element != ElementType.DIRT){
-            LoseHealth();
-            LoseHealth();
+            while(_health > 3){
+                LoseHealth();
+            }
         }else if(_element != ElementType.DIRT && element == ElementType.DIRT){
             GainHealth();
             GainHealth();
@@ -703,14 +711,17 @@ public class PlayerController : MonoBehaviour
 
     public void SetHealth(int health){
         _health = health;
+        HealthDisplay.setHeartCount(health);
     }
     public void GainHealth(){
         _health++;
+        HealthDisplay.addHeart();
         //Do gain health UI work here
     }
     public void LoseHealth(){
         _damaged = true;
         _health--;
+        HealthDisplay.removeHeart();
         //Do lose health UI work here
     }
 
@@ -750,5 +761,10 @@ public class PlayerController : MonoBehaviour
     IEnumerator DeathCoroutine(){
         _endGameScreen.SetActive(true);
         yield return null;
+    }
+
+    
+    void Win(){
+        _winScreen.SetActive(true);
     }
 }
