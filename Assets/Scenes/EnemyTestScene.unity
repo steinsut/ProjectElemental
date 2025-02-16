@@ -461,6 +461,10 @@ PrefabInstance:
       propertyPath: _endGameScreen
       value: 
       objectReference: {fileID: 1567455147}
+    - target: {fileID: 3302107188200243970, guid: 42cbf73a71c49d34f8b7e65b1f4528cd, type: 3}
+      propertyPath: _transformAnimator
+      value: 
+      objectReference: {fileID: 2000973623}
     - target: {fileID: 3518676369297369071, guid: 42cbf73a71c49d34f8b7e65b1f4528cd, type: 3}
       propertyPath: m_Controller
       value: 
@@ -1292,6 +1296,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d09e69b18c313d84ca4a071d73bf82db, type: 3}
+--- !u!95 &2000973623 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5631565880881475591, guid: 42cbf73a71c49d34f8b7e65b1f4528cd, type: 3}
+  m_PrefabInstance: {fileID: 328627988}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1426402106838972953
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1516,7 +1525,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5191022251090970881, guid: 5db7e9d38e92c274da8ee268748dccf1, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5835007677231199302, guid: 5db7e9d38e92c274da8ee268748dccf1, type: 3}
       propertyPath: player

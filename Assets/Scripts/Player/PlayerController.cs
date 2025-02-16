@@ -25,6 +25,9 @@ public class PlayerController : MonoBehaviour
     private Quaternion _initialRotation;
     
     [SerializeField]
+    private Animator _transformAnimator;
+    
+    [SerializeField]
     private int _health = 3;
 
     [SerializeField]
@@ -206,11 +209,13 @@ public class PlayerController : MonoBehaviour
                 _cursor.SetTrackedTransform(transform);
                 _animator.StopPlayback();
                 _animator.runtimeAnimatorController = _waterAnimator;
+                _transformAnimator.SetTrigger("WaterTransform");
                 break;
             case ElementType.FIRE:
                 _cursor.SetTrackedTransform(_projectileAnchor);
                 _animator.StopPlayback();
                 _animator.runtimeAnimatorController = _fireAnimator;
+                _transformAnimator.SetTrigger("FireTransform");
                 _backArm.enabled = true;
                 _frontArm.enabled = true;
                 break;
@@ -218,6 +223,7 @@ public class PlayerController : MonoBehaviour
                 _cursor.SetTrackedTransform(transform);
                 _animator.StopPlayback();
                 _animator.runtimeAnimatorController = _airAnimator;
+                _transformAnimator.SetTrigger("AirTransform");
                 break;
         }
         //Do element switching animations and set sprites here, if needed
@@ -668,7 +674,7 @@ public class PlayerController : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other){
         if(other.gameObject.layer == LayerMask.NameToLayer("EnemyProjectile") || other.gameObject.CompareTag("EnvironmentalHazard")){
             if(_damaged){return;}
-            if(other.gameObject.CompareTag("EnvironmentalHazard") && Element == ElementType.DIRT)
+            if(other.gameObject.CompareTag("EnvironmentalHazard") && Element == ElementType.DIRT){return;}//ignore environmental hazards if dirt
             StartCoroutine(TakeDamageCoroutine());
         }
     }
